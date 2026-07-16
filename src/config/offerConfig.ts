@@ -1,32 +1,55 @@
 /**
- * CONFIGURAÇÃO CENTRAL DA OFERTA
- * Edite este arquivo para alterar preço, checkout, pixel, variantes e textos-chave
- * sem precisar vasculhar componentes.
+ * CONFIGURAÇÃO CENTRAL DA OFERTA — DOIS PLANOS
+ * Edite este arquivo para preço, checkout, pixel e flags sem vasculhar componentes.
  */
 
-export type OfferVariant = 'single_offer' | 'two_plans' | 'short_page' | 'long_page'
+export type OfferVariant =
+  | 'two_plans'
+  | 'single_essential'
+  | 'single_premium'
+  | 'short_two_plans'
+  | 'long_two_plans'
+
+export type PlanId = 'essential' | 'premium'
 export type HeadlineVariant = 'A' | 'B' | 'C'
-export type CtaVariant = 'A' | 'B' | 'C'
+export type PlanOrder = 'essential_first' | 'premium_first'
+export type DefaultPlanHighlight = 'essential' | 'premium'
 
 export const offerConfig = {
   // ——— Produto ———
   PRODUCT_NAME: 'História Interativa',
+  PRODUCT_MECHANISM: 'Sistema Aula Pronta',
   PRODUCT_SUBTITLE: 'Sistema Aula Pronta',
-  PRODUCT_PRICE: 'R$ 22,90',
-  ORIGINAL_PRICE: 'R$ 97,00',
   NUMBER_OF_ACTIVITIES: '500+',
   GUARANTEE_DAYS: 7,
 
+  // ——— Plano Essencial ———
+  ESSENTIAL_PLAN_NAME: 'Essencial',
+  ESSENTIAL_PRICE: 'R$ 10,00',
+  ESSENTIAL_ORIGINAL_PRICE: 'R$ 47,00',
+  ESSENTIAL_CHECKOUT_URL: '',
+
+  // ——— Plano Premium ———
+  PREMIUM_PLAN_NAME: 'Premium',
+  PREMIUM_PRICE: 'R$ 22,90',
+  PREMIUM_ORIGINAL_PRICE: 'R$ 147,00',
+  PREMIUM_CHECKOUT_URL: '',
+  PREMIUM_PRICE_DIFFERENCE: 'R$ 12,90',
+  PREMIUM_LIFETIME_ACCESS: true,
+  PREMIUM_FUTURE_UPDATES: true,
+
+  // ——— Compatibilidade (preço de entrada da oferta) ———
+  ENTRY_PRICE: 'R$ 10',
+  ENTRY_PRICE_FULL: 'R$ 10,00',
+
   // ——— URLs ———
-  // Cole o link real do checkout (Hotmart, Kiwify, etc.)
-  CHECKOUT_URL: '',
   SUPPORT_URL: '/contato',
   SUPPORT_EMAIL: 'suporte@historainterativa.com.br',
   TERMS_URL: '/termos',
   PRIVACY_URL: '/privacidade',
   CONTACT_URL: '/contato',
 
-  // ——— Rastreamento (deixe vazio se ainda não tiver) ———
+  // ——— Rastreamento ———
   META_PIXEL_ID: '',
   GA_MEASUREMENT_ID: '',
 
@@ -71,38 +94,31 @@ export const offerConfig = {
     },
   ] as const,
 
-  // Imagem horizontal para compartilhamento
   OG_IMAGE: '/images/og-image.webp',
 
   // ——— BNCC ———
   BNCC_ENABLED: true,
-  // Use linguagem honesta: só diga "100% alinhado" se todos os materiais forem revisados
-  BNCC_CLAIM: 'Organizado com base nas competências e habilidades da BNCC.',
+  BNCC_CLAIM: 'Organizado com base na BNCC',
 
-  // ——— Flags de seção ———
+  // ——— Flags ———
   SHOW_SOCIAL_PROOF: false,
   SHOW_AUTHOR_SECTION: false,
   SHOW_COUNTDOWN: false,
+  SHOW_TOP_BAR: true,
   SHOW_STICKY_CTA: true,
 
-  // ——— Variante da página ———
-  // single_offer | two_plans | short_page | long_page
-  OFFER_VARIANT: 'single_offer' as OfferVariant,
+  // ——— Variante ———
+  OFFER_VARIANT: 'two_plans' as OfferVariant,
+  DEFAULT_PLAN_HIGHLIGHT: 'premium' as DefaultPlanHighlight,
+  PLAN_ORDER: 'essential_first' as PlanOrder,
 
-  // ——— A/B tests (persistidos em localStorage) ———
-  // Deixe null para sorteio automático na primeira visita
+  // ——— A/B ———
   FORCE_HEADLINE_VARIANT: null as HeadlineVariant | null,
-  FORCE_CTA_VARIANT: null as CtaVariant | null,
+  // null = usa headline A (do zero). B = preço no hero
+  FORCE_HERO_PRICE_HEADLINE: null as boolean | null,
 
-  // ——— Barra de oferta ———
-  OFFER_BAR_TEXT: 'OFERTA DE LANÇAMENTO • ACESSO IMEDIATO',
-
-  // ——— Copy de CTAs (variantes A/B/C) ———
-  CTA_VARIANTS: {
-    A: 'QUERO MINHAS AULAS PRONTAS',
-    B: 'QUERO ACESSAR AS 500 ATIVIDADES',
-    C: 'QUERO ECONOMIZAR TEMPO',
-  } as const,
+  OFFER_BAR_TEXT:
+    'OFERTA DE LANÇAMENTO • MAIS DE 500 ATIVIDADES A PARTIR DE R$ 10',
 
   HEADLINE_VARIANTS: {
     A: {
@@ -111,8 +127,8 @@ export const offerConfig = {
       after: '',
     },
     B: {
-      before: 'Mais de 500 atividades de História prontas para sua próxima aula',
-      highlight: '',
+      before: 'Mais de 500 atividades a partir de ',
+      highlight: 'R$ 10',
       after: '',
     },
     C: {
@@ -122,44 +138,53 @@ export const offerConfig = {
     },
   } as const,
 
-  // ——— Dois planos (só se OFFER_VARIANT === 'two_plans') ———
-  PLANS: [
-    {
-      id: 'essencial',
-      name: 'Essencial',
-      price: 'R$ 22,90',
-      originalPrice: 'R$ 97,00',
-      checkoutUrl: '',
-      features: [
-        'Biblioteca com mais de 500 atividades',
-        'Sistema Aula Pronta',
-        'PDFs para imprimir ou projetar',
-        'Organização por tema',
-        'Apoio relacionado à BNCC',
-        'Garantia de 7 dias',
-      ],
-      highlighted: false,
-    },
-    {
-      id: 'completo',
-      name: 'Completo',
-      price: 'R$ 37,90',
-      originalPrice: 'R$ 147,00',
-      checkoutUrl: '',
-      features: [
-        'Tudo do Essencial',
-        'Banco de avaliações',
-        'Planos de aula',
-        'Planejamento',
-        'Linhas do tempo e mapas',
-        'Guia de aulas participativas',
-        'Garantia de 7 dias',
-      ],
-      highlighted: true,
-    },
-  ],
+  ESSENTIAL_FEATURES: [
+    'Mais de 500 atividades',
+    'PDFs para imprimir',
+    'Recursos para projetar',
+    'Organização por tema',
+    'Organização com base na BNCC',
+    'Acesso digital',
+    'Garantia de 7 dias',
+  ] as const,
 
-  // ——— Autor (só se SHOW_AUTHOR_SECTION === true) ———
+  PREMIUM_EXTRA_FEATURES: [
+    'Tudo do Plano Essencial',
+    '100 avaliações adicionais',
+    'Planos de aula prontos',
+    'Planejamento anual',
+    'Coleção Premium de mapas e linhas do tempo',
+    'Guia de aulas participativas',
+  ] as const,
+
+  PREMIUM_BONUSES: [
+    {
+      name: '100 Avaliações de História',
+      description:
+        'Avaliações, exercícios diagnósticos, atividades avaliativas e materiais de revisão.',
+    },
+    {
+      name: 'Planos de Aula Prontos',
+      description:
+        'Modelos para organizar objetivos, conteúdo, aplicação e fechamento da aula.',
+    },
+    {
+      name: 'Planejamento Anual',
+      description:
+        'Uma estrutura para distribuir temas e conteúdos ao longo do período letivo.',
+    },
+    {
+      name: 'Linhas do Tempo e Mapas Premium',
+      description:
+        'Uma coleção adicional de recursos visuais para imprimir ou projetar.',
+    },
+    {
+      name: 'Guia para Aulas Mais Participativas',
+      description:
+        'Sugestões práticas para utilizar perguntas, grupos, jogos e atividades durante as aulas.',
+    },
+  ] as const,
+
   AUTHOR: {
     name: '',
     photo: '',
@@ -169,7 +194,6 @@ export const offerConfig = {
     profileUrl: '',
   },
 
-  // ——— Depoimentos reais (só se SHOW_SOCIAL_PROOF === true) ———
   TESTIMONIALS: [] as Array<{
     name: string
     state: string
@@ -179,17 +203,15 @@ export const offerConfig = {
     resultImage?: string
   }>,
 
-  // ——— SEO ———
   SEO: {
-    title: '500 Atividades de História Prontas | História Interativa',
+    title: '500 Atividades de História a partir de R$ 10 | História Interativa',
     description:
-      'Acesse mais de 500 atividades de História organizadas para imprimir ou projetar. Materiais para diferentes temas, turmas e momentos da aula.',
+      'Mais de 500 atividades de História prontas para imprimir ou projetar. Plano Essencial a partir de R$ 10 ou Premium completo por R$ 22,90.',
     ogTitle: 'Nunca mais prepare uma aula de História do zero',
     ogDescription:
-      'Mais de 500 atividades organizadas e prontas para imprimir ou projetar.',
+      'Mais de 500 atividades organizadas a partir de R$ 10. Escolha o Essencial ou o Premium.',
   },
 
-  // ——— Legal ———
   COPYRIGHT_YEAR: new Date().getFullYear(),
   LEGAL_DISCLAIMER:
     'Este produto é um material educativo digital de apoio ao planejamento e à aplicação de aulas. Ele não substitui formação docente, planejamento pedagógico, orientação da escola ou análise das necessidades específicas de cada turma.',

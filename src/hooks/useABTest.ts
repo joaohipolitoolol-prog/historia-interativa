@@ -1,29 +1,30 @@
 import { useMemo, useState, useEffect } from 'react'
 import {
   applyUrlOverrides,
-  getCtaLabel,
   getHeadlineCopy,
 } from '@/lib/abTest'
-import type { CtaVariant, HeadlineVariant } from '@/config/offerConfig'
+import type { HeadlineVariant, OfferVariant } from '@/config/offerConfig'
 import { trackEvent } from '@/lib/tracking'
 
 export function useABTest() {
   const [headlineVariant, setHeadlineVariant] = useState<HeadlineVariant>('A')
-  const [ctaVariant, setCtaVariant] = useState<CtaVariant>('A')
-  const [pageVariant, setPageVariant] = useState('single_offer')
+  const [pageVariant, setPageVariant] = useState<OfferVariant>('two_plans')
+  const [planOrder, setPlanOrder] = useState<'essential_first' | 'premium_first'>(
+    'essential_first',
+  )
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
     const result = applyUrlOverrides()
     setHeadlineVariant(result.headline)
-    setCtaVariant(result.cta)
     setPageVariant(result.pageVariant)
+    setPlanOrder(result.planOrder)
     setReady(true)
 
     trackEvent('PageViewed', {
       headline_variant: result.headline,
-      cta_variant: result.cta,
       page_variant: result.pageVariant,
+      plan_order: result.planOrder,
     })
   }, [])
 
@@ -31,14 +32,12 @@ export function useABTest() {
     () => getHeadlineCopy(headlineVariant),
     [headlineVariant],
   )
-  const ctaLabel = useMemo(() => getCtaLabel(ctaVariant), [ctaVariant])
 
   return {
     ready,
     headlineVariant,
-    ctaVariant,
     pageVariant,
+    planOrder,
     headline,
-    ctaLabel,
   }
 }

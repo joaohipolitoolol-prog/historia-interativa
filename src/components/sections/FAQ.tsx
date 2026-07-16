@@ -8,6 +8,39 @@ import { Accordion } from '@/components/ui/Accordion'
 
 const faqItems = [
   {
+    question: 'Qual é a diferença entre Essencial e Premium?',
+    answer:
+      'O Essencial inclui a biblioteca principal com mais de 500 atividades de História. O Premium inclui tudo do Essencial e adiciona avaliações, planos de aula, planejamento anual, materiais visuais extras e o guia de aulas participativas.',
+  },
+  {
+    question: 'O plano de R$ 10 inclui realmente as 500 atividades?',
+    answer:
+      'Sim. O Plano Essencial inclui o acervo principal com mais de 500 atividades. Os materiais extras de avaliação e planejamento fazem parte do Premium.',
+  },
+  {
+    question: 'Posso comprar o Essencial e mudar depois?',
+    answer:
+      'Hoje a compra é feita por plano no checkout. Caso exista um processo de upgrade na plataforma utilizada, ele será informado no suporte. Não há upgrade automático nesta página.',
+  },
+  {
+    question: 'Existe mensalidade?',
+    answer: 'Não. Os dois planos possuem pagamento único.',
+  },
+  {
+    question: 'O Premium custa apenas R$ 12,90?',
+    answer: `Não. O valor total do Premium é ${offerConfig.PREMIUM_PRICE}. Ele custa ${offerConfig.PREMIUM_PRICE_DIFFERENCE} a mais que o Essencial.`,
+  },
+  {
+    question: 'Os order bumps são obrigatórios?',
+    answer:
+      'Não. Os materiais adicionais apresentados no checkout são opcionais.',
+  },
+  {
+    question: 'Os order bumps já estão incluídos no Premium?',
+    answer:
+      'Não. O Premium inclui os materiais informados na página. Os produtos adicionais do checkout são coleções separadas e opcionais.',
+  },
+  {
     question: 'Como recebo o material?',
     answer:
       'Após a confirmação do pagamento, você receberá as informações para acessar o conteúdo digital pela plataforma utilizada na compra.',
@@ -18,19 +51,9 @@ const faqItems = [
       'Não. O História Interativa é um produto digital. Você acessa pelo celular ou computador e pode imprimir os materiais desejados.',
   },
   {
-    question: 'Posso usar com mais de uma turma?',
+    question: 'Recebo tudo na hora?',
     answer:
-      'O material pode ser utilizado pelo comprador em suas próprias turmas, respeitando os termos de uso. Não é permitido revender, distribuir ou disponibilizar os arquivos publicamente.',
-  },
-  {
-    question: 'Preciso imprimir tudo?',
-    answer:
-      'Não. Você pode imprimir apenas as atividades que deseja utilizar. Alguns materiais também podem ser projetados em sala.',
-  },
-  {
-    question: 'Funciona para qual etapa?',
-    answer:
-      'O material reúne recursos para diferentes conteúdos do Ensino Fundamental e Ensino Médio. Consulte a organização interna para escolher os materiais adequados à sua turma.',
+      'O acesso é liberado após a confirmação do pagamento, conforme o prazo da forma de pagamento escolhida.',
   },
   {
     question: 'As atividades seguem a BNCC?',
@@ -38,27 +61,8 @@ const faqItems = [
       'Os materiais são organizados com base em temas, competências e habilidades relacionadas à BNCC. O professor continua responsável por avaliar a adequação à turma, escola e planejamento.',
   },
   {
-    question: 'Preciso de internet durante a aula?',
-    answer:
-      'Não necessariamente. Você pode baixar os materiais antes da aula, imprimir ou salvar os arquivos no dispositivo.',
-  },
-  {
-    question: 'Existe mensalidade?',
-    answer: 'Não. O valor informado corresponde a um pagamento único.',
-  },
-  {
-    question: 'Recebo na hora?',
-    answer:
-      'O acesso é liberado após a confirmação do pagamento. O tempo pode variar conforme a forma de pagamento escolhida.',
-  },
-  {
     question: 'Tem garantia?',
     answer: `Sim. Você poderá solicitar o reembolso dentro do prazo de ${offerConfig.GUARANTEE_DAYS} dias, conforme as regras da plataforma de pagamento.`,
-  },
-  {
-    question: 'Posso compartilhar os arquivos com outros professores?',
-    answer:
-      'A compra é individual. Consulte os termos de uso para entender as permissões e restrições de compartilhamento.',
   },
   {
     question: 'As atividades são editáveis?',
@@ -72,7 +76,7 @@ export function FAQ() {
     <Section id="faq" tone="warm">
       <SectionTitle>Perguntas frequentes</SectionTitle>
       <SectionLead>
-        Respostas diretas sobre acesso, uso, BNCC e garantia.
+        Respostas sobre planos, acesso, BNCC e garantia.
       </SectionLead>
       <div className="mt-8 max-w-3xl">
         <Accordion items={faqItems} />

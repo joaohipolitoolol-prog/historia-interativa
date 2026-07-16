@@ -13,11 +13,11 @@ import { ProductDemo } from '@/components/sections/ProductDemo'
 import { ActivityTypes } from '@/components/sections/ActivityTypes'
 import { BNCC } from '@/components/sections/BNCC'
 import { WhatsIncluded } from '@/components/sections/WhatsIncluded'
-import { Bonuses } from '@/components/sections/Bonuses'
-import { Comparison } from '@/components/sections/Comparison'
+import { PremiumExtras } from '@/components/sections/PremiumExtras'
+import { PlanComparison } from '@/components/sections/PlanComparison'
 import { Access } from '@/components/sections/Access'
 import { ForWhom } from '@/components/sections/ForWhom'
-import { Offer } from '@/components/sections/Offer'
+import { Pricing } from '@/components/sections/Pricing'
 import { Guarantee } from '@/components/sections/Guarantee'
 import { SocialProof } from '@/components/sections/SocialProof'
 import { Author } from '@/components/sections/Author'
@@ -25,7 +25,7 @@ import { FAQ } from '@/components/sections/FAQ'
 import { FinalCTA } from '@/components/sections/FinalCTA'
 
 export function LandingPage() {
-  const { ready, headline, ctaLabel, pageVariant } = useABTest()
+  const { ready, headline, pageVariant, planOrder } = useABTest()
 
   useEffect(() => {
     initAnalytics()
@@ -54,7 +54,8 @@ export function LandingPage() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const shortPage = pageVariant === 'short_page'
+  const shortPage =
+    pageVariant === 'short_two_plans' || pageVariant === 'single_essential'
 
   if (!ready) {
     return (
@@ -80,10 +81,10 @@ export function LandingPage() {
       <OfferBar />
 
       <main>
-        <Hero headline={headline} ctaLabel={ctaLabel} />
+        <Hero headline={headline} />
         <Problem />
-        <Mechanism ctaLabel={ctaLabel} />
-        <ProductDemo ctaLabel={ctaLabel} />
+        <Mechanism />
+        <ProductDemo />
 
         {!shortPage ? (
           <>
@@ -92,18 +93,20 @@ export function LandingPage() {
           </>
         ) : null}
 
-        <WhatsIncluded ctaLabel={ctaLabel} showCta={!shortPage} />
+        <WhatsIncluded />
 
         {!shortPage ? (
           <>
-            <Bonuses />
-            <Comparison />
+            <PremiumExtras />
+            <PlanComparison />
             <Access />
             <ForWhom />
           </>
-        ) : null}
+        ) : (
+          <PlanComparison />
+        )}
 
-        <Offer ctaLabel={ctaLabel} pageVariant={pageVariant} />
+        <Pricing planOrder={planOrder} variant={pageVariant} />
         <Guarantee />
 
         {!shortPage ? (
@@ -114,11 +117,11 @@ export function LandingPage() {
         ) : null}
 
         <FAQ />
-        <FinalCTA ctaLabel={ctaLabel} />
+        <FinalCTA />
       </main>
 
       <Footer />
-      <StickyCTA ctaLabel={ctaLabel} />
+      <StickyCTA />
     </div>
   )
 }

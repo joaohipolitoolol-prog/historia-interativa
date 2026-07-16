@@ -8,12 +8,20 @@ export type TrackEventName =
   | 'MechanismViewed'
   | 'ProductPreviewViewed'
   | 'BonusViewed'
+  | 'PremiumBonusesViewed'
   | 'OfferViewed'
+  | 'PlansViewed'
+  | 'EssentialPlanViewed'
+  | 'PremiumPlanViewed'
+  | 'PlanComparisonViewed'
   | 'CheckoutClicked'
+  | 'EssentialCheckoutClicked'
+  | 'PremiumCheckoutClicked'
   | 'FAQOpened'
   | 'GuaranteeViewed'
   | 'StickyCTAViewed'
   | 'StickyCTAClicked'
+  | 'StickyPlanSelectorClicked'
   | 'SupportClicked'
   | 'Page75Viewed'
   | 'PageCompleted'
@@ -31,10 +39,6 @@ declare global {
 let analyticsInitialized = false
 const firedOnce = new Set<string>()
 
-/**
- * Carrega Meta Pixel e GA de forma não bloqueante.
- * Não quebra a página se os IDs estiverem vazios.
- */
 export function initAnalytics(): void {
   if (analyticsInitialized || typeof window === 'undefined') return
   analyticsInitialized = true
@@ -103,8 +107,7 @@ function loadGoogleAnalytics(measurementId: string): void {
 }
 
 /**
- * Dispara eventos personalizados para Meta, GA e console (dev).
- * Nunca dispara Purchase na landing page.
+ * Dispara eventos personalizados. Nunca dispara Purchase na landing.
  */
 export function trackEvent(
   eventName: TrackEventName,
@@ -121,6 +124,7 @@ export function trackEvent(
     ...properties,
     product: offerConfig.PRODUCT_NAME,
     page_variant: offerConfig.OFFER_VARIANT,
+    timestamp: Date.now(),
   }
 
   if (import.meta.env.DEV) {

@@ -8,22 +8,22 @@ const cards = [
   {
     title: 'Horas procurando materiais',
     description:
-      'Você encontra uma atividade aqui, uma imagem ali e ainda precisa organizar tudo antes da aula.',
+      'Você encontra uma atividade em um site, uma imagem em outro e ainda precisa organizar tudo.',
   },
   {
     title: 'Alunos pouco envolvidos',
     description:
-      'Quando a aula fica limitada à explicação e leitura, a participação pode cair rapidamente.',
+      'Quando a aula fica restrita à leitura e explicação, a participação pode diminuir.',
   },
   {
     title: 'Conteúdo espalhado',
     description:
-      'Arquivos, links, exercícios e imagens ficam separados, dificultando o planejamento.',
+      'Arquivos, links e exercícios separados tornam o planejamento mais cansativo.',
   },
   {
-    title: 'Cobrança da BNCC',
+    title: 'Organização curricular',
     description:
-      'Além de ensinar o conteúdo, você ainda precisa relacionar atividades às competências e habilidades curriculares.',
+      'Além do conteúdo, o professor precisa relacionar materiais ao planejamento e à BNCC.',
   },
 ]
 
@@ -36,16 +36,16 @@ export function Problem() {
       <SectionLead>
         Entre corrigir atividades, organizar notas, responder alunos e lidar
         com várias turmas, ainda sobra para você procurar textos, imagens,
-        mapas e exercícios para a próxima aula.
+        perguntas e exercícios para a próxima aula.
       </SectionLead>
       <div className="mt-5 max-w-2xl space-y-4 text-[16px] leading-relaxed text-muted">
-        <p>Muitas vezes, o planejamento começa do zero.</p>
+        <p>O problema não é falta de dedicação.</p>
         <p>
-          Você abre várias abas, salva arquivos separados e tenta montar algo
-          que seja fácil de entender e interessante para a turma.
+          É precisar começar praticamente do zero a cada novo conteúdo.
         </p>
         <p className="font-semibold text-navy">
-          O História Interativa foi criado para eliminar essa parte repetitiva.
+          O História Interativa reúne mais de 500 atividades em uma biblioteca
+          organizada para facilitar essa parte do planejamento.
         </p>
       </div>
 
@@ -55,9 +55,7 @@ export function Problem() {
             key={card.title}
             className="rounded-2xl border border-border bg-warm p-5 sm:p-6"
           >
-            <p className="text-[13px] font-bold text-orange">
-              0{index + 1}
-            </p>
+            <p className="text-[13px] font-bold text-orange">0{index + 1}</p>
             <h3 className="mt-2 text-[18px] font-extrabold text-navy">
               {card.title}
             </h3>

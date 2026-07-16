@@ -9,12 +9,7 @@ import { Lightbox } from '@/components/ui/Lightbox'
 import { Button } from '@/components/ui/Button'
 import { useInViewTrack } from '@/hooks/useInViewTrack'
 
-type ProductDemoProps = {
-  ctaLabel: string
-  showCta?: boolean
-}
-
-export function ProductDemo({ ctaLabel, showCta = true }: ProductDemoProps) {
+export function ProductDemo() {
   const ref = useInViewTrack('ProductPreviewViewed')
   const [active, setActive] = useState<{
     src: string
@@ -22,20 +17,24 @@ export function ProductDemo({ ctaLabel, showCta = true }: ProductDemoProps) {
     caption: string
   } | null>(null)
 
+  const images = offerConfig.PRODUCT_PREVIEW_IMAGES.filter(
+    (image) => !image.placeholder,
+  )
+
   return (
     <Section id="previas" tone="white">
       <div ref={ref}>
         <SectionTitle>
-          Veja alguns materiais que você encontrará por dentro
+          Veja o que você poderá utilizar nas suas aulas
         </SectionTitle>
         <SectionLead>
-          Exemplos reais do tipo de atividade que você encontra na biblioteca —
-          prontos para imprimir ou projetar.
+          Exemplos do tipo de atividade disponível na biblioteca — prontos para
+          imprimir ou projetar.
         </SectionLead>
 
         <div className="mt-8 -mx-5 px-5 overflow-x-auto no-scrollbar sm:mx-0 sm:px-0 sm:overflow-visible">
           <ul className="flex gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-3 min-w-max sm:min-w-0">
-            {offerConfig.PRODUCT_PREVIEW_IMAGES.map((image) => (
+            {images.map((image) => (
               <li key={image.caption} className="w-[260px] sm:w-auto shrink-0">
                 <button
                   type="button"
@@ -69,11 +68,11 @@ export function ProductDemo({ ctaLabel, showCta = true }: ProductDemoProps) {
           </ul>
         </div>
 
-        {showCta ? (
-          <div className="mt-8">
-            <Button position="after_previews">{ctaLabel}</Button>
-          </div>
-        ) : null}
+        <div className="mt-8">
+          <Button mode="scroll-to-plans">
+            QUERO ACESSAR A PARTIR DE {offerConfig.ENTRY_PRICE}
+          </Button>
+        </div>
 
         <Lightbox
           open={Boolean(active)}

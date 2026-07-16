@@ -68,7 +68,7 @@ export function SocialProof() {
 function ProductProof() {
   return (
     <Section id="prova" tone="cool">
-      <SectionTitle>Veja o que você receberá antes de comprar</SectionTitle>
+      <SectionTitle>Veja o material antes de escolher seu plano</SectionTitle>
       <SectionLead>
         Enquanto não houver depoimentos autorizados, a prova fica no produto:
         organização, variedade e formato de aplicação.

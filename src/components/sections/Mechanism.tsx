@@ -10,43 +10,35 @@ import { useInViewTrack } from '@/hooks/useInViewTrack'
 const steps = [
   {
     number: '01',
-    title: 'Escolha o tema',
-    description:
-      'Encontre atividades relacionadas ao conteúdo histórico que será trabalhado com a turma.',
+    title: 'Escolha o conteúdo',
+    description: 'Encontre o tema histórico que será trabalhado.',
   },
   {
     number: '02',
-    title: 'Abra o material',
-    description:
-      'Consulte a atividade, as orientações, o formato e as informações relacionadas à BNCC.',
+    title: 'Abra a atividade',
+    description: 'Consulte a proposta, o formato e a aplicação.',
   },
   {
     number: '03',
     title: 'Imprima ou projete',
-    description:
-      'Utilize o PDF em sala, entregue aos alunos ou apresente na tela.',
+    description: 'Baixe o material e escolha como utilizar.',
   },
   {
     number: '04',
     title: 'Aplique com a turma',
     description:
-      'Use individualmente, em duplas, grupos ou como complemento da explicação.',
+      'Use individualmente, em grupos, como introdução ou revisão.',
   },
 ]
 
-type MechanismProps = {
-  ctaLabel: string
-  showCta?: boolean
-}
-
-export function Mechanism({ ctaLabel, showCta = true }: MechanismProps) {
+export function Mechanism() {
   const ref = useInViewTrack('MechanismViewed')
 
   return (
     <Section id="sistema" tone="cool" className="!pt-14">
       <div ref={ref}>
         <SectionLabel>UM PROCESSO SIMPLES</SectionLabel>
-        <SectionTitle>Do tema da aula até a atividade pronta</SectionTitle>
+        <SectionTitle>Escolha o tema, abra o material e aplique</SectionTitle>
         <SectionLead>
           O Sistema Aula Pronta organiza os materiais para você encontrar o que
           precisa sem começar novamente a cada planejamento.
@@ -72,15 +64,13 @@ export function Mechanism({ ctaLabel, showCta = true }: MechanismProps) {
         </ol>
 
         <blockquote className="mt-10 rounded-2xl border-l-4 border-orange bg-white p-5 sm:p-6 text-[16px] sm:text-[17px] font-semibold text-navy leading-relaxed">
-          Você continua sendo responsável pela aula. O sistema elimina apenas o
-          trabalho repetitivo de começar tudo do zero.
+          Você continua no controle da aula. O sistema elimina apenas a parte
+          repetitiva de procurar e montar tudo do zero.
         </blockquote>
 
-        {showCta ? (
-          <div className="mt-8">
-            <Button position="after_mechanism">{ctaLabel}</Button>
-          </div>
-        ) : null}
+        <div className="mt-8">
+          <Button mode="scroll-to-plans">VER PLANOS</Button>
+        </div>
       </div>
     </Section>
   )

@@ -22,8 +22,8 @@ export function Guarantee() {
           Conheça o material por {offerConfig.GUARANTEE_DAYS} dias
         </SectionTitle>
         <SectionLead className="mx-auto">
-          Depois da compra, você poderá acessar os materiais e entender como o{' '}
-          {offerConfig.PRODUCT_NAME} está organizado.
+          Após a compra, você poderá acessar o plano escolhido e conferir como
+          os materiais estão organizados.
         </SectionLead>
         <div className="mt-4 space-y-3 text-[16px] leading-relaxed text-muted">
           <p>

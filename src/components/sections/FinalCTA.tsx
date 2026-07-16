@@ -1,13 +1,12 @@
 import { offerConfig } from '@/config/offerConfig'
 import { Button } from '@/components/ui/Button'
 
-type FinalCTAProps = {
-  ctaLabel: string
-}
-
-export function FinalCTA({ ctaLabel }: FinalCTAProps) {
+export function FinalCTA() {
   return (
-    <section id="cta-final" className="relative overflow-hidden bg-navy py-16 sm:py-20">
+    <section
+      id="cta-final"
+      className="relative overflow-hidden bg-navy py-16 sm:py-20"
+    >
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
@@ -21,19 +20,19 @@ export function FinalCTA({ ctaLabel }: FinalCTAProps) {
           Sua próxima aula não precisa começar com uma página em branco
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-[16px] sm:text-[18px] leading-relaxed text-white/75">
-          Acesse {offerConfig.NUMBER_OF_ACTIVITIES} atividades de História,
-          escolha o tema e encontre um material pronto para imprimir ou
-          projetar.
+          Escolha entre mais de {offerConfig.NUMBER_OF_ACTIVITIES} atividades
+          por {offerConfig.ENTRY_PRICE} ou o Sistema Aula Pronta completo por{' '}
+          {offerConfig.PREMIUM_PRICE}.
         </p>
-        <div className="mt-8">
-          <Button position="final" className="min-w-[280px]">
-            {ctaLabel}
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <Button mode="scroll-to-plans" className="min-w-[260px]">
+            ESCOLHER MEU PLANO
           </Button>
-          <p className="mt-3 text-[14px] sm:text-[15px] text-white/65">
-            {offerConfig.PRODUCT_PRICE} • Pagamento único • Garantia de{' '}
-            {offerConfig.GUARANTEE_DAYS} dias
-          </p>
         </div>
+        <p className="mt-3 text-[14px] sm:text-[15px] text-white/65">
+          Pagamento único • Acesso digital • Garantia de{' '}
+          {offerConfig.GUARANTEE_DAYS} dias
+        </p>
       </div>
     </section>
   )

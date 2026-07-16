@@ -1,14 +1,19 @@
-import { offerConfig } from '@/config/offerConfig'
+import { offerConfig, type PlanId } from '@/config/offerConfig'
 
 export type CtaPosition =
   | 'hero'
   | 'after_mechanism'
   | 'after_previews'
-  | 'offer'
-  | 'sticky'
-  | 'final'
   | 'after_included'
-  | 'plan'
+  | 'pricing_essential'
+  | 'pricing_premium'
+  | 'sticky'
+  | 'sticky_essential'
+  | 'sticky_premium'
+  | 'final'
+  | 'final_essential'
+  | 'final_premium'
+  | 'plan_comparison'
 
 const UTM_KEYS = [
   'utm_source',
@@ -33,22 +38,28 @@ function getCurrentSearchParams(): URLSearchParams {
   return new URLSearchParams(window.location.search)
 }
 
+function getCheckoutBase(plan?: PlanId): string {
+  if (plan === 'essential') return offerConfig.ESSENTIAL_CHECKOUT_URL
+  if (plan === 'premium') return offerConfig.PREMIUM_CHECKOUT_URL
+  return ''
+}
+
 /**
- * Monta a URL de checkout preservando UTMs e adicionando metadados de conversão.
+ * Monta a URL de checkout do plano escolhido, preservando UTMs.
  */
 export function buildCheckoutUrl(
+  plan: PlanId,
   position: CtaPosition,
-  overrideUrl?: string,
 ): string {
-  const base = overrideUrl || offerConfig.CHECKOUT_URL
+  const base = getCheckoutBase(plan)
 
   if (!base) {
     if (import.meta.env.DEV) {
       console.warn(
-        `[checkout] CHECKOUT_URL não configurado. Posição do CTA: ${position}`,
+        `[checkout] Checkout do plano "${plan}" não configurado. Posição: ${position}`,
       )
     }
-    return '#checkout-nao-configurado'
+    return `#checkout-${plan}-nao-configurado`
   }
 
   try {
@@ -63,17 +74,15 @@ export function buildCheckoutUrl(
     }
 
     const pageVariant =
-      current.get('page_variant') ||
-      offerConfig.OFFER_VARIANT ||
-      'single_offer'
+      current.get('page_variant') || offerConfig.OFFER_VARIANT
 
+    url.searchParams.set('selected_plan', plan)
     url.searchParams.set('page_variant', pageVariant)
     url.searchParams.set('cta_position', position)
     url.searchParams.set('device_type', getDeviceType())
 
     return url.toString()
   } catch {
-    // URL relativa ou malformada: anexar query string manualmente
     const current = getCurrentSearchParams()
     const params = new URLSearchParams()
 
@@ -82,6 +91,7 @@ export function buildCheckoutUrl(
       if (value) params.set(key, value)
     }
 
+    params.set('selected_plan', plan)
     params.set(
       'page_variant',
       current.get('page_variant') || offerConfig.OFFER_VARIANT,
@@ -94,6 +104,13 @@ export function buildCheckoutUrl(
   }
 }
 
-export function isCheckoutConfigured(overrideUrl?: string): boolean {
-  return Boolean(overrideUrl || offerConfig.CHECKOUT_URL)
+export function isCheckoutConfigured(plan: PlanId): boolean {
+  return Boolean(getCheckoutBase(plan))
+}
+
+export function scrollToPlans(): void {
+  const el = document.getElementById('planos')
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 }

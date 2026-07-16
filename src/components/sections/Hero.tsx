@@ -9,17 +9,16 @@ type HeroProps = {
     highlight: string
     after: string
   }
-  ctaLabel: string
 }
 
 const benefits = [
   `${offerConfig.NUMBER_OF_ACTIVITIES} atividades`,
-  'Prontas para imprimir ou projetar',
-  'Organizadas com base na BNCC',
+  'Materiais prontos para imprimir',
+  'Recursos para projetar',
   'Acesso pelo celular ou computador',
 ]
 
-export function Hero({ headline, ctaLabel }: HeroProps) {
+export function Hero({ headline }: HeroProps) {
   const ctaRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -56,7 +55,7 @@ export function Hero({ headline, ctaLabel }: HeroProps) {
         <div className="grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
           <div className="fade-up order-1">
             <p className="inline-flex items-center rounded-full border border-orange/25 bg-white px-3.5 py-1.5 text-[12px] sm:text-[13px] font-bold uppercase tracking-[0.1em] text-orange">
-              SISTEMA AULA PRONTA • ALINHADO À BNCC
+              SISTEMA AULA PRONTA • {offerConfig.BNCC_CLAIM.toUpperCase()}
             </p>
 
             <h1 className="mt-4 sm:mt-5 text-[34px] leading-[1.12] sm:text-[44px] md:text-[52px] font-extrabold text-navy text-balance">
@@ -79,7 +78,16 @@ export function Hero({ headline, ctaLabel }: HeroProps) {
               abra o material e aplique com sua turma.
             </p>
 
-            {/* Mobile: imagem logo após a promessa, antes do CTA */}
+            <div className="mt-5 inline-flex flex-col rounded-2xl border border-border bg-white px-5 py-4 shadow-[var(--shadow-soft)]">
+              <p className="text-[13px] font-semibold text-muted">
+                Plano Essencial a partir de
+              </p>
+              <p className="text-[40px] sm:text-[44px] font-extrabold leading-none text-navy font-[family-name:var(--font-display)]">
+                {offerConfig.ENTRY_PRICE_FULL}
+              </p>
+              <p className="mt-1 text-[14px] text-muted">Pagamento único.</p>
+            </div>
+
             <div className="mt-6 lg:hidden">
               <HeroProductImage priority />
             </div>
@@ -102,12 +110,12 @@ export function Hero({ headline, ctaLabel }: HeroProps) {
             </ul>
 
             <div ref={ctaRef} className="mt-7 sm:mt-8">
-              <Button position="hero" className="w-full sm:w-auto min-w-[280px]">
-                {ctaLabel}
+              <Button mode="scroll-to-plans" className="w-full sm:w-auto min-w-[280px]">
+                QUERO ACESSAR A PARTIR DE {offerConfig.ENTRY_PRICE}
               </Button>
               <p className="mt-3 text-[14px] sm:text-[15px] text-muted">
-                Pagamento único de {offerConfig.PRODUCT_PRICE} • Acesso imediato
-                • Garantia de {offerConfig.GUARANTEE_DAYS} dias
+                Escolha entre o Plano Essencial e o Premium • Garantia de{' '}
+                {offerConfig.GUARANTEE_DAYS} dias
               </p>
             </div>
           </div>
@@ -115,15 +123,15 @@ export function Hero({ headline, ctaLabel }: HeroProps) {
           <div className="relative order-2 hidden lg:block">
             <HeroProductImage />
             <p className="mt-4 text-center text-[15px] font-medium text-muted">
-              {offerConfig.NUMBER_OF_ACTIVITIES} recursos organizados em um
-              único lugar.
+              Mais de {offerConfig.NUMBER_OF_ACTIVITIES} materiais no Plano
+              Essencial.
             </p>
           </div>
         </div>
 
         <p className="mt-4 text-center text-[14px] font-medium text-muted lg:hidden">
-          {offerConfig.NUMBER_OF_ACTIVITIES} recursos organizados em um único
-          lugar.
+          Mais de {offerConfig.NUMBER_OF_ACTIVITIES} materiais no Plano
+          Essencial.
         </p>
       </div>
     </section>
@@ -147,9 +155,9 @@ function HeroProductImage({ priority = false }: { priority?: boolean }) {
         />
       </div>
 
-      <div className="absolute -bottom-3 left-3 right-3 sm:left-auto sm:-right-2 sm:bottom-4 sm:max-w-[180px] rounded-2xl border border-border bg-white p-3 shadow-[var(--shadow-soft)]">
+      <div className="absolute -bottom-3 left-3 right-3 sm:left-auto sm:-right-2 sm:bottom-4 sm:max-w-[200px] rounded-2xl border border-border bg-white p-3 shadow-[var(--shadow-soft)]">
         <p className="text-[11px] font-bold uppercase tracking-wide text-orange">
-          Sistema Aula Pronta
+          {offerConfig.PRODUCT_MECHANISM}
         </p>
         <p className="mt-1 text-[13px] font-semibold text-navy leading-snug">
           Escolha o tema → imprima ou projete → aplique
