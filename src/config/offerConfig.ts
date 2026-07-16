@@ -54,7 +54,9 @@ export const offerConfig = {
   GA_MEASUREMENT_ID: '',
 
   // ——— Imagens ———
-  PRODUCT_IMAGE: '/images/hero-product.webp',
+  PRODUCT_IMAGE: '/images/hero-bundle.webp',
+  PREMIUM_IMAGE: '/images/premium-bundle.webp',
+  PREVIEWS_GRID_IMAGE: '/images/previews-grid.webp',
   PRODUCT_PREVIEW_IMAGES: [
     {
       src: '/images/preview-01.webp',

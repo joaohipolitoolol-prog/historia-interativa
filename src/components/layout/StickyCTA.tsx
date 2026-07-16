@@ -6,7 +6,6 @@ import { trackEvent } from '@/lib/tracking'
 export function StickyCTA() {
   const [visible, setVisible] = useState(false)
   const [dismissed, setDismissed] = useState(false)
-  const [sawPricing, setSawPricing] = useState(false)
   const trackedRef = useRef(false)
 
   useEffect(() => {
@@ -14,19 +13,11 @@ export function StickyCTA() {
 
     const update = () => {
       const hero = document.getElementById('hero')
-      const pricing = document.getElementById('planos')
       const pastHero = hero
         ? hero.getBoundingClientRect().bottom < 8
         : window.scrollY > 480
 
       setVisible(pastHero)
-
-      if (pricing) {
-        const rect = pricing.getBoundingClientRect()
-        if (rect.top < window.innerHeight * 0.7) {
-          setSawPricing(true)
-        }
-      }
 
       if (pastHero && !trackedRef.current) {
         trackedRef.current = true
@@ -47,50 +38,27 @@ export function StickyCTA() {
     return null
   }
 
-  const showDual =
-    sawPricing && typeof window !== 'undefined' && window.innerWidth >= 390
-
   return (
     <div
       data-sticky-cta="true"
       className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-white/95 backdrop-blur-md shadow-[0_-8px_30px_rgba(32,26,23,0.08)]"
     >
-      <div className="container-page flex items-center gap-2 sm:gap-3 py-3">
+      <div className="container-page flex items-center gap-3 py-3">
         <div className="min-w-0 flex-1">
           <p className="truncate text-[13px] font-semibold text-navy">
             A partir de {offerConfig.ENTRY_PRICE}
           </p>
           <p className="truncate text-[12px] text-muted">
-            Essencial ou Premium • Pagamento único
+            Essencial ou Premium
           </p>
         </div>
 
-        {showDual ? (
-          <div className="flex shrink-0 gap-2">
-            <Button
-              plan="essential"
-              position="sticky_essential"
-              className="!px-3 !py-2.5 text-[13px]"
-              variant="ghost"
-            >
-              ESSENCIAL {offerConfig.ENTRY_PRICE}
-            </Button>
-            <Button
-              plan="premium"
-              position="sticky_premium"
-              className="!px-3 !py-2.5 text-[13px]"
-            >
-              PREMIUM {offerConfig.PREMIUM_PRICE}
-            </Button>
-          </div>
-        ) : (
-          <Button
-            mode="scroll-to-plans"
-            className="shrink-0 !px-4 !py-3 text-[14px]"
-          >
-            ESCOLHER MEU PLANO
-          </Button>
-        )}
+        <Button
+          mode="scroll-to-plans"
+          className="shrink-0 !px-4 !py-3 text-[14px]"
+        >
+          ESCOLHER MEU PLANO
+        </Button>
 
         <button
           type="button"

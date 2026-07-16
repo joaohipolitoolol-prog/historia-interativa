@@ -7,14 +7,10 @@ import {
 import { Button } from '@/components/ui/Button'
 
 const included = [
-  `Mais de ${offerConfig.NUMBER_OF_ACTIVITIES} atividades`,
-  'Conteúdos de diferentes períodos históricos',
-  'Materiais para Ensino Fundamental e Médio',
-  'Atividades individuais',
-  'Atividades em grupo',
-  'Recursos visuais',
-  'Materiais para imprimir',
-  'Materiais para projetar',
+  `${offerConfig.NUMBER_OF_ACTIVITIES} atividades`,
+  'PDFs para imprimir',
+  'Recursos para projetar',
+  'Fundamental e Médio',
   'Organização por tema',
   'Organização com base na BNCC',
   'Acesso digital',
@@ -23,35 +19,37 @@ const included = [
 
 export function WhatsIncluded() {
   return (
-    <Section id="incluido" tone="cool">
-      <SectionTitle>
-        O Plano Essencial já entrega a biblioteca completa de atividades
-      </SectionTitle>
-      <SectionLead>
-        Por {offerConfig.ENTRY_PRICE}, você recebe o acervo principal com mais
-        de {offerConfig.NUMBER_OF_ACTIVITIES} atividades de História.
-      </SectionLead>
+    <Section id="incluido" tone="cool" compact>
+      <div className="section-intro">
+        <SectionTitle centered>
+          O Plano Essencial já entrega as mais de 500 atividades
+        </SectionTitle>
+        <SectionLead centered>
+          Por {offerConfig.ENTRY_PRICE}, você recebe o acervo principal com
+          materiais prontos para imprimir ou projetar.
+        </SectionLead>
+      </div>
 
-      <div className="mt-8 rounded-3xl border border-border bg-white p-6 sm:p-8 shadow-[var(--shadow-soft)]">
-        <div className="flex flex-wrap items-end justify-between gap-4 border-b border-border pb-6">
+      <div className="mx-auto mt-8 max-w-3xl rounded-[24px] border border-border bg-white p-6 sm:p-8 shadow-[var(--shadow-soft)]">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-5">
           <div>
-            <p className="text-[13px] font-bold uppercase tracking-[0.12em] text-orange">
-              Núcleo da oferta
+            <p className="text-[12px] font-bold uppercase tracking-[0.12em] text-orange">
+              Plano Essencial
             </p>
-            <h3 className="mt-1 text-[24px] sm:text-[28px] font-extrabold text-navy">
-              {offerConfig.PRODUCT_NAME} Essencial
+            <h3 className="mt-1 text-[22px] font-extrabold text-navy">
+              Biblioteca completa de atividades
             </h3>
           </div>
           <p className="rounded-full bg-green/10 px-4 py-2 text-[14px] font-bold text-green">
-            A partir de {offerConfig.ENTRY_PRICE}
+            {offerConfig.ENTRY_PRICE_FULL}
           </p>
         </div>
 
-        <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+        <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
           {included.map((item) => (
             <li
               key={item}
-              className="flex items-start gap-2.5 text-[15px] sm:text-[16px] text-ink"
+              className="flex items-start gap-2.5 text-[15px] text-ink"
             >
               <span
                 aria-hidden="true"
@@ -64,14 +62,14 @@ export function WhatsIncluded() {
           ))}
         </ul>
 
-        <p className="mt-6 rounded-xl border border-border bg-warm px-4 py-3 text-[15px] text-muted">
+        <p className="mt-5 text-[14px] text-muted">
           O Plano Essencial não é uma amostra. Ele entrega as mais de{' '}
           {offerConfig.NUMBER_OF_ACTIVITIES} atividades anunciadas.
         </p>
 
-        <div className="mt-8">
-          <Button mode="scroll-to-plans">
-            VER PLANOS A PARTIR DE {offerConfig.ENTRY_PRICE}
+        <div className="mt-6">
+          <Button mode="scroll-to-plans" fullWidth className="sm:w-auto">
+            VER PLANOS
           </Button>
         </div>
       </div>

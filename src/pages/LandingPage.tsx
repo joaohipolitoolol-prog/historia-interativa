@@ -10,22 +10,17 @@ import { Hero } from '@/components/sections/Hero'
 import { Problem } from '@/components/sections/Problem'
 import { Mechanism } from '@/components/sections/Mechanism'
 import { ProductDemo } from '@/components/sections/ProductDemo'
-import { ActivityTypes } from '@/components/sections/ActivityTypes'
-import { BNCC } from '@/components/sections/BNCC'
 import { WhatsIncluded } from '@/components/sections/WhatsIncluded'
 import { PremiumExtras } from '@/components/sections/PremiumExtras'
 import { PlanComparison } from '@/components/sections/PlanComparison'
-import { Access } from '@/components/sections/Access'
-import { ForWhom } from '@/components/sections/ForWhom'
 import { Pricing } from '@/components/sections/Pricing'
 import { Guarantee } from '@/components/sections/Guarantee'
-import { SocialProof } from '@/components/sections/SocialProof'
-import { Author } from '@/components/sections/Author'
 import { FAQ } from '@/components/sections/FAQ'
 import { FinalCTA } from '@/components/sections/FinalCTA'
+import { Author } from '@/components/sections/Author'
 
 export function LandingPage() {
-  const { ready, headline, pageVariant, planOrder } = useABTest()
+  const { ready, headline, planOrder } = useABTest()
 
   useEffect(() => {
     initAnalytics()
@@ -53,9 +48,6 @@ export function LandingPage() {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
-
-  const shortPage =
-    pageVariant === 'short_two_plans' || pageVariant === 'single_essential'
 
   if (!ready) {
     return (
@@ -85,37 +77,12 @@ export function LandingPage() {
         <Problem />
         <Mechanism />
         <ProductDemo />
-
-        {!shortPage ? (
-          <>
-            <ActivityTypes />
-            <BNCC />
-          </>
-        ) : null}
-
         <WhatsIncluded />
-
-        {!shortPage ? (
-          <>
-            <PremiumExtras />
-            <PlanComparison />
-            <Access />
-            <ForWhom />
-          </>
-        ) : (
-          <PlanComparison />
-        )}
-
-        <Pricing planOrder={planOrder} variant={pageVariant} />
+        <PremiumExtras />
+        <PlanComparison />
+        <Pricing planOrder={planOrder} />
         <Guarantee />
-
-        {!shortPage ? (
-          <>
-            <SocialProof />
-            <Author />
-          </>
-        ) : null}
-
+        <Author />
         <FAQ />
         <FinalCTA />
       </main>

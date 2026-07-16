@@ -1,27 +1,16 @@
-# QA Report — Oferta dois planos
-
-Data: 2026-07-16
-
-## Critérios
+# QA Report — Redesign visual
 
 | Critério | Status |
 |---|---|
-| Hero comunica a partir de R$ 10 | ✅ |
-| Essencial = 500+ atividades (não amostra) | ✅ |
-| Premium diferenciado (+ R$ 12,90) | ✅ |
-| Sem plano intermediário | ✅ |
-| Checkouts separados | ✅ (URLs a configurar) |
-| UTMs preservadas | ✅ |
-| Premium não obrigatório | ✅ |
-| Extras Premium identificados | ✅ |
-| Order bumps só documentados (fora da LP) | ✅ |
-| Sem prova social inventada | ✅ |
-| Sem contador/urgência falsa | ✅ |
-| Build OK | ✅ |
+| Hero mais forte | ✅ |
+| Mockups melhores | ✅ |
+| Página mais curta | ✅ (~30% menos seções) |
+| Pricing mais chamativo | ✅ |
+| Premium desejável (+ R$ 12,90) | ✅ |
+| Essencial claro | ✅ |
+| Sem prova inventada | ✅ |
+| Mobile-first | ✅ |
+| Build | pendente neste passo |
 
-## Bloqueadores para tráfego
-
-1. `ESSENTIAL_CHECKOUT_URL`
-2. `PREMIUM_CHECKOUT_URL`
-3. Configurar 4 order bumps na Cakto
-4. Pixel Meta (recomendado)
+## Trocar mockups
+Ver `MOCKUP_STRATEGY.md`

@@ -6,61 +6,29 @@ import {
 } from '@/components/ui/Section'
 import { useInViewTrack } from '@/hooks/useInViewTrack'
 
-type Row = {
-  label: string
-  essential: boolean | string
-  premium: boolean | string
-}
+type Row = { label: string; essential: boolean; premium: boolean }
 
-function buildRows(): Row[] {
-  return [
-    { label: 'Mais de 500 atividades', essential: true, premium: true },
-    { label: 'Materiais para imprimir', essential: true, premium: true },
-    { label: 'Recursos para projetar', essential: true, premium: true },
-    {
-      label: 'Organização com base na BNCC',
-      essential: true,
-      premium: true,
-    },
-    {
-      label: '100 avaliações adicionais',
-      essential: false,
-      premium: true,
-    },
-    { label: 'Planos de aula prontos', essential: false, premium: true },
-    { label: 'Planejamento anual', essential: false, premium: true },
-    {
-      label: 'Coleção Premium de mapas e linhas do tempo',
-      essential: false,
-      premium: true,
-    },
-    {
-      label: 'Guia de aulas participativas',
-      essential: false,
-      premium: true,
-    },
-    {
-      label: 'Atualizações futuras',
-      essential: false,
-      premium: offerConfig.PREMIUM_FUTURE_UPDATES,
-    },
-    {
-      label: 'Acesso ao acervo adquirido',
-      essential: true,
-      premium: true,
-    },
-    {
-      label: 'Acesso vitalício destacado',
-      essential: false,
-      premium: offerConfig.PREMIUM_LIFETIME_ACCESS,
-    },
-  ]
-}
+const rows: Row[] = [
+  { label: 'Mais de 500 atividades', essential: true, premium: true },
+  { label: 'Materiais para imprimir', essential: true, premium: true },
+  { label: 'Recursos para projetar', essential: true, premium: true },
+  { label: 'Organização com base na BNCC', essential: true, premium: true },
+  { label: '100 avaliações adicionais', essential: false, premium: true },
+  { label: 'Planos de aula prontos', essential: false, premium: true },
+  { label: 'Planejamento anual', essential: false, premium: true },
+  {
+    label: 'Coleção Premium de mapas e linhas do tempo',
+    essential: false,
+    premium: true,
+  },
+  {
+    label: 'Guia de aulas participativas',
+    essential: false,
+    premium: true,
+  },
+]
 
-function Cell({ value }: { value: boolean | string }) {
-  if (typeof value === 'string') {
-    return <span className="text-[14px] font-semibold text-navy">{value}</span>
-  }
+function Cell({ value }: { value: boolean }) {
   return value ? (
     <span className="inline-flex items-center gap-1 text-[14px] font-bold text-green">
       <span aria-hidden="true">✓</span> Incluído
@@ -72,29 +40,29 @@ function Cell({ value }: { value: boolean | string }) {
 
 export function PlanComparison() {
   const ref = useInViewTrack('PlanComparisonViewed')
-  const rows = buildRows()
 
   return (
-    <Section id="comparacao-planos" tone="cool">
+    <Section id="comparacao-planos" tone="cool" compact>
       <div ref={ref}>
-        <SectionTitle>
-          Escolha o acesso que faz mais sentido para você
-        </SectionTitle>
-        <SectionLead>
-          Diferença clara entre a biblioteca principal e o sistema completo.
-        </SectionLead>
+        <div className="section-intro">
+          <SectionTitle centered>
+            Escolha o acesso que faz mais sentido para você
+          </SectionTitle>
+          <SectionLead centered>
+            O que os dois planos têm — e o que só o Premium inclui.
+          </SectionLead>
+        </div>
 
-        {/* Mobile: stacked comparisons */}
-        <div className="mt-8 space-y-3 md:hidden">
+        <div className="mt-8 space-y-2.5 md:hidden">
           {rows.map((row) => (
             <div
               key={row.label}
               className="rounded-2xl border border-border bg-white p-4"
             >
               <p className="text-[15px] font-bold text-navy">{row.label}</p>
-              <div className="mt-3 grid grid-cols-2 gap-3">
+              <div className="mt-2.5 grid grid-cols-2 gap-3">
                 <div>
-                  <p className="text-[12px] font-semibold uppercase tracking-wide text-muted">
+                  <p className="text-[11px] font-semibold uppercase tracking-wide text-muted">
                     Essencial
                   </p>
                   <div className="mt-1">
@@ -102,7 +70,7 @@ export function PlanComparison() {
                   </div>
                 </div>
                 <div>
-                  <p className="text-[12px] font-semibold uppercase tracking-wide text-orange">
+                  <p className="text-[11px] font-semibold uppercase tracking-wide text-orange">
                     Premium
                   </p>
                   <div className="mt-1">
@@ -114,8 +82,7 @@ export function PlanComparison() {
           ))}
         </div>
 
-        {/* Desktop table */}
-        <div className="mt-8 hidden md:block overflow-hidden rounded-3xl border border-border bg-white">
+        <div className="mt-8 hidden md:block overflow-hidden rounded-[24px] border border-border bg-white shadow-[var(--shadow-soft)]">
           <table className="w-full text-left">
             <thead className="bg-navy text-white">
               <tr>
@@ -128,7 +95,7 @@ export function PlanComparison() {
               {rows.map((row, i) => (
                 <tr
                   key={row.label}
-                  className={i % 2 === 0 ? 'bg-white' : 'bg-warm/60'}
+                  className={i % 2 === 0 ? 'bg-white' : 'bg-warm/50'}
                 >
                   <td className="px-5 py-3.5 text-[15px] font-semibold text-navy">
                     {row.label}
@@ -145,25 +112,24 @@ export function PlanComparison() {
           </table>
         </div>
 
-        <div className="mt-8 grid gap-4 sm:grid-cols-2">
+        <div className="mt-6 grid gap-3 sm:grid-cols-2">
           <div className="rounded-2xl border border-border bg-white p-5">
-            <p className="font-extrabold text-navy">Plano Essencial</p>
-            <p className="mt-2 text-[15px] text-muted">
+            <p className="font-extrabold text-navy">Essencial</p>
+            <p className="mt-1.5 text-[15px] text-muted">
               Para quem quer as atividades prontas pelo menor preço.
             </p>
           </div>
-          <div className="rounded-2xl border border-orange/30 bg-orange-soft p-5">
-            <p className="font-extrabold text-navy">Plano Premium</p>
-            <p className="mt-2 text-[15px] text-muted">
-              Para quem também quer materiais de planejamento, avaliação e
-              organização.
+          <div className="rounded-2xl border border-orange/25 bg-orange-soft p-5">
+            <p className="font-extrabold text-navy">Premium</p>
+            <p className="mt-1.5 text-[15px] text-muted">
+              Para quem também quer planejamento, avaliação e organização.
             </p>
           </div>
         </div>
 
-        <p className="mt-6 text-[14px] text-muted text-center">
-          O Plano Essencial não é uma amostra. Ele entrega as mais de{' '}
-          {offerConfig.NUMBER_OF_ACTIVITIES} atividades anunciadas.
+        <p className="mt-5 text-center text-[13px] text-muted">
+          O Essencial não é amostra — entrega as {offerConfig.NUMBER_OF_ACTIVITIES}{' '}
+          atividades anunciadas.
         </p>
       </div>
     </Section>

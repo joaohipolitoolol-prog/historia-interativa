@@ -7,59 +7,45 @@ import {
 const cards = [
   {
     title: 'Horas procurando materiais',
-    description:
-      'Você encontra uma atividade em um site, uma imagem em outro e ainda precisa organizar tudo.',
+    description: 'Uma atividade aqui, uma imagem ali — e ainda falta organizar.',
   },
   {
     title: 'Alunos pouco envolvidos',
-    description:
-      'Quando a aula fica restrita à leitura e explicação, a participação pode diminuir.',
+    description: 'Só leitura e explicação deixam a participação cair rápido.',
   },
   {
     title: 'Conteúdo espalhado',
-    description:
-      'Arquivos, links e exercícios separados tornam o planejamento mais cansativo.',
+    description: 'Arquivos e links separados tornam o planejamento cansativo.',
   },
   {
     title: 'Organização curricular',
-    description:
-      'Além do conteúdo, o professor precisa relacionar materiais ao planejamento e à BNCC.',
+    description: 'Além do conteúdo, ainda falta relacionar tudo à BNCC.',
   },
 ]
 
 export function Problem() {
   return (
-    <Section id="problema" tone="white">
-      <SectionTitle>
-        Preparar aula não deveria consumir todo o seu tempo livre
-      </SectionTitle>
-      <SectionLead>
-        Entre corrigir atividades, organizar notas, responder alunos e lidar
-        com várias turmas, ainda sobra para você procurar textos, imagens,
-        perguntas e exercícios para a próxima aula.
-      </SectionLead>
-      <div className="mt-5 max-w-2xl space-y-4 text-[16px] leading-relaxed text-muted">
-        <p>O problema não é falta de dedicação.</p>
-        <p>
-          É precisar começar praticamente do zero a cada novo conteúdo.
-        </p>
-        <p className="font-semibold text-navy">
-          O História Interativa reúne mais de 500 atividades em uma biblioteca
-          organizada para facilitar essa parte do planejamento.
-        </p>
+    <Section id="problema" tone="white" compact>
+      <div className="section-intro">
+        <SectionTitle centered>
+          Preparar aula não deveria consumir todo o seu tempo livre
+        </SectionTitle>
+        <SectionLead centered>
+          Entre corrigir atividades, organizar notas e lidar com várias turmas,
+          ainda sobra para você procurar textos, imagens, perguntas e exercícios.
+          O História Interativa organiza essa parte para você não precisar
+          começar tudo do zero de novo.
+        </SectionLead>
       </div>
 
-      <div className="mt-10 grid gap-4 sm:grid-cols-2">
-        {cards.map((card, index) => (
+      <div className="mt-8 grid gap-3 sm:grid-cols-2">
+        {cards.map((card) => (
           <article
             key={card.title}
-            className="rounded-2xl border border-border bg-warm p-5 sm:p-6"
+            className="rounded-2xl border border-border bg-warm p-5"
           >
-            <p className="text-[13px] font-bold text-orange">0{index + 1}</p>
-            <h3 className="mt-2 text-[18px] font-extrabold text-navy">
-              {card.title}
-            </h3>
-            <p className="mt-2 text-[15px] sm:text-[16px] leading-relaxed text-muted">
+            <h3 className="text-[17px] font-extrabold text-navy">{card.title}</h3>
+            <p className="mt-1.5 text-[15px] leading-relaxed text-muted">
               {card.description}
             </p>
           </article>

@@ -10,7 +10,7 @@ export function Guarantee() {
   const ref = useInViewTrack('GuaranteeViewed')
 
   return (
-    <Section id="garantia" tone="white">
+    <Section id="garantia" tone="white" compact>
       <div
         ref={ref}
         className="mx-auto max-w-3xl rounded-3xl border border-green/25 bg-green/5 p-6 sm:p-10 text-center"

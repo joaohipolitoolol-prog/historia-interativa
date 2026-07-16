@@ -1,7 +1,6 @@
 import { offerConfig } from '@/config/offerConfig'
 import {
   Section,
-  SectionLabel,
   SectionLead,
   SectionTitle,
 } from '@/components/ui/Section'
@@ -22,14 +21,13 @@ export function Pricing({ planOrder }: PricingProps) {
 
   return (
     <Section id="planos" tone="orange-soft">
-      <div ref={ref} className="text-center max-w-3xl mx-auto">
-        <SectionLabel>ESCOLHA SEU ACESSO</SectionLabel>
-        <SectionTitle>
+      <div ref={ref} className="section-intro">
+        <SectionTitle centered>
           Escolha o acesso que faz mais sentido para você
         </SectionTitle>
-        <SectionLead className="mx-auto">
-          O Essencial entrega as {offerConfig.NUMBER_OF_ACTIVITIES} atividades.
-          O Premium adiciona planejamento, avaliações e materiais extras.
+        <SectionLead centered>
+          Essencial: as {offerConfig.NUMBER_OF_ACTIVITIES} atividades. Premium:
+          o sistema completo.
         </SectionLead>
       </div>
 
@@ -56,38 +54,34 @@ function EssentialCard() {
   return (
     <article
       ref={ref}
-      className="flex flex-col rounded-3xl border border-border bg-white p-6 sm:p-8 shadow-[var(--shadow-soft)]"
+      className="flex flex-col rounded-[28px] border border-border bg-white p-6 sm:p-8 shadow-[var(--shadow-soft)]"
     >
       <p className="inline-flex w-fit rounded-full bg-cool px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-navy">
         Acesso essencial
       </p>
-      <h3 className="mt-3 text-[24px] font-extrabold text-navy">
-        {offerConfig.PRODUCT_NAME} {offerConfig.ESSENTIAL_PLAN_NAME}
+      <h3 className="mt-4 text-[26px] font-extrabold text-navy">
+        {offerConfig.ESSENTIAL_PLAN_NAME}
       </h3>
       <p className="mt-2 text-[15px] text-muted">
-        A biblioteca principal com mais de {offerConfig.NUMBER_OF_ACTIVITIES}{' '}
-        atividades de História.
+        Biblioteca com {offerConfig.NUMBER_OF_ACTIVITIES} atividades de História.
       </p>
 
-      <div className="mt-5">
+      <div className="mt-6">
         <p className="text-[14px] text-muted">
           De{' '}
           <span className="line-through">
             {offerConfig.ESSENTIAL_ORIGINAL_PRICE}
           </span>
         </p>
-        <p className="text-[48px] font-extrabold leading-none text-navy font-[family-name:var(--font-display)]">
+        <p className="mt-1 text-[56px] font-extrabold leading-none text-navy font-[family-name:var(--font-display)]">
           {offerConfig.ESSENTIAL_PRICE}
         </p>
-        <p className="mt-2 text-[15px] font-semibold text-ink">Pagamento único.</p>
+        <p className="mt-2 text-[15px] font-semibold text-ink">Pagamento único</p>
       </div>
 
       <ul className="mt-6 space-y-2.5 flex-1">
         {offerConfig.ESSENTIAL_FEATURES.map((item) => (
-          <li
-            key={item}
-            className="flex items-start gap-2.5 text-[15px] text-ink"
-          >
+          <li key={item} className="flex items-start gap-2.5 text-[15px] text-ink">
             <span
               aria-hidden="true"
               className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-green text-white text-[11px] font-bold"
@@ -104,7 +98,7 @@ function EssentialCard() {
           QUERO O ESSENCIAL POR {offerConfig.ENTRY_PRICE}
         </Button>
         <p className="mt-3 text-center text-[13px] text-muted">
-          Mais de {offerConfig.NUMBER_OF_ACTIVITIES} atividades • Pagamento único
+          {offerConfig.NUMBER_OF_ACTIVITIES} atividades • Pagamento único
         </p>
       </div>
     </article>
@@ -127,41 +121,40 @@ function PremiumCard() {
   return (
     <article
       ref={ref}
-      className="relative flex flex-col rounded-3xl border-2 border-orange bg-white p-6 sm:p-8 shadow-[var(--shadow-soft)] ring-2 ring-orange/15"
+      className="relative flex flex-col rounded-[28px] border-[3px] border-orange bg-gradient-to-b from-white to-orange-soft/40 p-6 sm:p-8 shadow-[var(--shadow-lift)]"
     >
-      <p className="inline-flex w-fit rounded-full bg-orange px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-white">
-        Mais escolhido
-      </p>
-      <h3 className="mt-3 text-[24px] font-extrabold text-navy">
-        {offerConfig.PRODUCT_NAME} {offerConfig.PREMIUM_PLAN_NAME}
+      <div className="absolute -top-3 left-6">
+        <p className="inline-flex rounded-full bg-orange px-3.5 py-1.5 text-[12px] font-bold uppercase tracking-wide text-white shadow-[var(--shadow-cta)]">
+          Mais escolhido
+        </p>
+      </div>
+
+      <h3 className="mt-4 text-[26px] font-extrabold text-navy">
+        {offerConfig.PREMIUM_PLAN_NAME}
       </h3>
       <p className="mt-2 text-[15px] text-muted">
-        Tudo do Essencial, mais avaliações, planejamento, planos de aula e
-        materiais adicionais.
+        Tudo do Essencial + planejamento, avaliações e organização.
       </p>
 
-      <div className="mt-5">
+      <div className="mt-6">
         <p className="text-[14px] text-muted">
           De{' '}
           <span className="line-through">
             {offerConfig.PREMIUM_ORIGINAL_PRICE}
           </span>
         </p>
-        <p className="text-[48px] font-extrabold leading-none text-navy font-[family-name:var(--font-display)]">
+        <p className="mt-1 text-[56px] font-extrabold leading-none text-navy font-[family-name:var(--font-display)]">
           {offerConfig.PREMIUM_PRICE}
         </p>
-        <p className="mt-3 inline-flex rounded-full bg-orange-soft px-3 py-1.5 text-[14px] font-bold text-orange">
-          Apenas {offerConfig.PREMIUM_PRICE_DIFFERENCE} a mais que o Essencial.
+        <p className="mt-4 inline-flex rounded-xl bg-orange px-4 py-2.5 text-[15px] sm:text-[16px] font-extrabold text-white shadow-[var(--shadow-cta)]">
+          Apenas {offerConfig.PREMIUM_PRICE_DIFFERENCE} a mais que o Essencial
         </p>
-        <p className="mt-2 text-[15px] font-semibold text-ink">Pagamento único.</p>
+        <p className="mt-3 text-[15px] font-semibold text-ink">Pagamento único</p>
       </div>
 
       <ul className="mt-6 space-y-2.5 flex-1">
         {premiumFeatures.map((item) => (
-          <li
-            key={item}
-            className="flex items-start gap-2.5 text-[15px] text-ink"
-          >
+          <li key={item} className="flex items-start gap-2.5 text-[15px] text-ink">
             <span
               aria-hidden="true"
               className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-green text-white text-[11px] font-bold"
