@@ -1,0 +1,124 @@
+import { useEffect } from 'react'
+import { useABTest } from '@/hooks/useABTest'
+import { initAnalytics, trackEvent } from '@/lib/tracking'
+
+import { OfferBar } from '@/components/layout/OfferBar'
+import { Footer } from '@/components/layout/Footer'
+import { StickyCTA } from '@/components/layout/StickyCTA'
+
+import { Hero } from '@/components/sections/Hero'
+import { Problem } from '@/components/sections/Problem'
+import { Mechanism } from '@/components/sections/Mechanism'
+import { ProductDemo } from '@/components/sections/ProductDemo'
+import { ActivityTypes } from '@/components/sections/ActivityTypes'
+import { BNCC } from '@/components/sections/BNCC'
+import { WhatsIncluded } from '@/components/sections/WhatsIncluded'
+import { Bonuses } from '@/components/sections/Bonuses'
+import { Comparison } from '@/components/sections/Comparison'
+import { Access } from '@/components/sections/Access'
+import { ForWhom } from '@/components/sections/ForWhom'
+import { Offer } from '@/components/sections/Offer'
+import { Guarantee } from '@/components/sections/Guarantee'
+import { SocialProof } from '@/components/sections/SocialProof'
+import { Author } from '@/components/sections/Author'
+import { FAQ } from '@/components/sections/FAQ'
+import { FinalCTA } from '@/components/sections/FinalCTA'
+
+export function LandingPage() {
+  const { ready, headline, ctaLabel, pageVariant } = useABTest()
+
+  useEffect(() => {
+    initAnalytics()
+
+    let reached75 = false
+    let completed = false
+
+    const onScroll = () => {
+      const scrollTop = window.scrollY
+      const docHeight =
+        document.documentElement.scrollHeight - window.innerHeight
+      if (docHeight <= 0) return
+      const progress = scrollTop / docHeight
+
+      if (progress >= 0.75 && !reached75) {
+        reached75 = true
+        trackEvent('Page75Viewed', {}, { once: true })
+      }
+      if (progress >= 0.95 && !completed) {
+        completed = true
+        trackEvent('PageCompleted', {}, { once: true })
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  const shortPage = pageVariant === 'short_page'
+
+  if (!ready) {
+    return (
+      <div className="min-h-screen bg-warm" aria-busy="true">
+        <OfferBar />
+        <div className="container-page py-20">
+          <div className="h-8 w-48 animate-pulse rounded bg-border" />
+          <div className="mt-4 h-12 w-full max-w-xl animate-pulse rounded bg-border" />
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="min-h-screen bg-warm pb-24">
+      <a
+        href="#hero"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:font-bold focus:text-navy"
+      >
+        Ir para o conteúdo
+      </a>
+
+      <OfferBar />
+
+      <main>
+        <Hero headline={headline} ctaLabel={ctaLabel} />
+        <Problem />
+        <Mechanism ctaLabel={ctaLabel} />
+        <ProductDemo ctaLabel={ctaLabel} />
+
+        {!shortPage ? (
+          <>
+            <ActivityTypes />
+            <BNCC />
+          </>
+        ) : null}
+
+        <WhatsIncluded ctaLabel={ctaLabel} showCta={!shortPage} />
+
+        {!shortPage ? (
+          <>
+            <Bonuses />
+            <Comparison />
+            <Access />
+            <ForWhom />
+          </>
+        ) : null}
+
+        <Offer ctaLabel={ctaLabel} pageVariant={pageVariant} />
+        <Guarantee />
+
+        {!shortPage ? (
+          <>
+            <SocialProof />
+            <Author />
+          </>
+        ) : null}
+
+        <FAQ />
+        <FinalCTA ctaLabel={ctaLabel} />
+      </main>
+
+      <Footer />
+      <StickyCTA ctaLabel={ctaLabel} />
+    </div>
+  )
+}

@@ -1,0 +1,7 @@
+# Adicione aqui as imagens reais do produto:
+# - hero-product.webp
+# - og-image.webp (1200x630 recomendado)
+# - preview-01.webp ... preview-06.webp
+#
+# Depois, em src/config/offerConfig.ts, defina placeholder: false
+# em cada item de PRODUCT_PREVIEW_IMAGES.
