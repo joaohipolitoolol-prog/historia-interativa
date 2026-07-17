@@ -46,15 +46,12 @@ const variants = {
   ghost: 'bg-transparent text-navy border border-border hover:bg-white',
 }
 
-export function Button(props: ButtonProps) {
-  const {
-    children,
-    variant = 'primary',
-    className = '',
-    fullWidth = false,
-  } = props
-
-  const classes = [
+function buildClassName(
+  variant: 'primary' | 'secondary' | 'ghost',
+  fullWidth: boolean,
+  className: string,
+) {
+  return [
     'inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-[16px] sm:text-[17px] font-bold tracking-wide transition-colors duration-200 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-orange',
     variants[variant],
     fullWidth ? 'w-full' : '',
@@ -62,9 +59,26 @@ export function Button(props: ButtonProps) {
   ]
     .filter(Boolean)
     .join(' ')
+}
+
+export function Button(props: ButtonProps) {
+  const variant = props.variant ?? 'primary'
+  const fullWidth = props.fullWidth ?? false
+  const className = props.className ?? ''
+  const classes = buildClassName(variant, fullWidth, className)
 
   if (props.mode === 'scroll-to-plans') {
-    const { trackAs = 'HeroCTASelected', onClick, ...rest } = props
+    const {
+      children,
+      trackAs = 'HeroCTASelected',
+      onClick,
+      mode: _mode,
+      variant: _variant,
+      className: _className,
+      fullWidth: _fullWidth,
+      ...rest
+    } = props
+
     return (
       <button
         type="button"
@@ -82,7 +96,17 @@ export function Button(props: ButtonProps) {
   }
 
   if (props.mode === 'action') {
-    const { trackAs, onClick, ...rest } = props
+    const {
+      children,
+      trackAs,
+      onClick,
+      mode: _mode,
+      variant: _variant,
+      className: _className,
+      fullWidth: _fullWidth,
+      ...rest
+    } = props
+
     return (
       <button
         type="button"
@@ -98,7 +122,19 @@ export function Button(props: ButtonProps) {
     )
   }
 
-  const { plan, position, trackAs, onClick, ...rest } = props
+  const {
+    children,
+    plan,
+    position,
+    trackAs,
+    onClick,
+    mode: _mode,
+    variant: _variant,
+    className: _className,
+    fullWidth: _fullWidth,
+    ...rest
+  } = props
+
   const href = buildCheckoutUrl(plan, position)
   const configured = isCheckoutConfigured(plan)
   const eventName: TrackEventName =
