@@ -19,6 +19,7 @@ export type TrackEventName =
   | 'EssentialCheckoutClicked'
   | 'PremiumCheckoutClicked'
   | 'FAQOpened'
+  | 'KeywordsModalOpened'
   | 'GuaranteeViewed'
   | 'StickyCTAViewed'
   | 'StickyPlanSelectorClicked'
