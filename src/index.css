@@ -99,6 +99,7 @@
     margin-inline: auto;
     text-align: center;
   }
+
   .animate-marquee {
     animation: marquee 28s linear infinite;
     width: max-content;
@@ -107,7 +108,19 @@
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
   }
+
+  .animate-sheet-up {
+    animation: sheetUp 0.32s ease-out both;
+  }
+  @keyframes sheetUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .animate-marquee { animation: none; }
+    .animate-marquee,
+    .animate-sheet-up {
+      animation: none !important;
+    }
   }
 }

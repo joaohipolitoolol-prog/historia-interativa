@@ -6,10 +6,10 @@ import { trackEvent } from '@/lib/tracking'
 export function Footer() {
   return (
     <footer className="border-t border-border bg-navy text-white">
-      <div className="container-page py-8 sm:py-10">
-        <div className="grid gap-8 md:grid-cols-[1.4fr_1fr]">
+      <div className="container-page py-9">
+        <div className="grid gap-7 md:grid-cols-[1.4fr_1fr]">
           <div>
-            <BrandLogo dark size="sm" />
+            <BrandLogo variant="dark" className="h-9 w-auto" />
             <p className="mt-3 text-[14px] text-white/70">
               {offerConfig.PRODUCT_TAGLINE}
             </p>
@@ -38,7 +38,7 @@ export function Footer() {
             </nav>
           </div>
         </div>
-        <div className="mt-7 border-t border-white/10 pt-4 text-[12px] text-white/45 space-y-1">
+        <div className="mt-7 border-t border-white/10 pt-4 text-[12px] text-white/40 space-y-1">
           <p>Produto digital. Nenhum material físico será enviado.</p>
           <p>
             © {offerConfig.COPYRIGHT_YEAR} {offerConfig.BRAND_NAME}. Todos os

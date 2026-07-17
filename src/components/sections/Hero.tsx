@@ -46,15 +46,15 @@ export function Hero({ headline }: HeroProps) {
         }}
       />
 
-      <div className="container-page relative py-7 sm:py-11 md:py-14">
+      <div className="container-page relative py-7 sm:py-10 md:py-12">
         <div className="mx-auto flex w-full max-w-3xl flex-col items-center text-center">
-          <BrandLogo />
+          <BrandLogo className="h-10 w-auto sm:h-11" />
 
-          <p className="mt-4 max-w-[95%] rounded-full border border-orange/20 bg-white px-3 py-1.5 text-[11px] sm:text-[12px] font-bold leading-snug text-orange">
-            {offerConfig.PRODUCT_MECHANISM} · {offerConfig.BNCC_CLAIM}
+          <p className="mt-4 inline-flex max-w-full items-center rounded-full bg-orange px-3.5 py-1.5 text-[11px] sm:text-[12px] font-bold uppercase tracking-[0.06em] text-white shadow-[var(--shadow-cta)]">
+            Sistema Aula Pronta
           </p>
 
-          <h1 className="mt-4 w-full text-[28px] leading-[1.12] sm:text-[42px] md:text-[50px] font-extrabold text-navy text-balance">
+          <h1 className="mt-4 w-full text-[28px] leading-[1.12] sm:text-[40px] md:text-[48px] font-extrabold text-navy text-balance">
             {headline.before}
             {headline.highlight ? (
               <span className="relative inline text-orange">
@@ -74,18 +74,18 @@ export function Hero({ headline }: HeroProps) {
             com sua turma.
           </p>
 
-          <div ref={ctaRef} className="mt-5 w-full max-w-sm sm:max-w-none">
-            <Button mode="scroll-to-plans" className="w-full sm:w-auto sm:min-w-[280px]">
+          <div ref={ctaRef} className="mt-5 w-full max-w-sm">
+            <Button mode="scroll-to-plans" className="w-full">
               QUERO ESCOLHER MEU ACESSO
             </Button>
-            <p className="mt-2 text-[12px] leading-snug text-muted">
+            <p className="mt-2 text-[12px] leading-snug text-muted/90">
               A partir de {offerConfig.ENTRY_PRICE} · Pagamento único · Garantia{' '}
               {offerConfig.GUARANTEE_DAYS} dias
             </p>
           </div>
         </div>
 
-        <div className="mx-auto mt-6 w-full max-w-4xl sm:mt-9">
+        <div className="mx-auto mt-6 w-full max-w-4xl sm:mt-8">
           <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-[var(--shadow-lift)] sm:rounded-[24px]">
             <img
               src={offerConfig.PRODUCT_IMAGE}
@@ -99,11 +99,11 @@ export function Hero({ headline }: HeroProps) {
           </div>
         </div>
 
-        <ul className="mx-auto mt-5 grid w-full max-w-2xl grid-cols-2 gap-2 sm:mt-7 sm:gap-2.5">
+        <ul className="mx-auto mt-5 grid w-full max-w-2xl grid-cols-2 gap-2 sm:gap-2.5">
           {benefits.map((item) => (
             <li
               key={item}
-              className="flex items-center gap-2 rounded-xl border border-border bg-white px-3 py-2.5 text-[13px] sm:px-4 sm:py-3 sm:text-[15px] font-medium text-ink"
+              className="flex items-center gap-2 rounded-xl border border-border bg-white px-3 py-2.5 text-[13px] sm:text-[14px] font-medium text-ink"
             >
               <span
                 aria-hidden="true"

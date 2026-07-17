@@ -6,13 +6,23 @@ import {
 } from '@/components/ui/Section'
 import { useInViewTrack } from '@/hooks/useInViewTrack'
 
-const previewCovers = [
-  { src: '/images/preview-06.webp', label: '100 avaliações' },
-  { src: '/images/preview-03.webp', label: 'Planos de aula' },
-  { src: '/images/preview-02.webp', label: 'Planejamento anual' },
-  { src: '/images/preview-05.webp', label: 'Mapas Premium' },
-  { src: '/images/preview-01.webp', label: 'Linhas do tempo' },
-  { src: '/images/preview-04.webp', label: 'Guia participativo' },
+const previewTiles = [
+  {
+    src: '/images/preview-02.webp',
+    label: 'Linhas do tempo',
+  },
+  {
+    src: '/images/preview-05.webp',
+    label: 'Mapas históricos',
+  },
+  {
+    src: '/images/preview-06.webp',
+    label: 'Avaliações',
+  },
+  {
+    src: '/images/preview-04.webp',
+    label: 'Material para projetar',
+  },
 ]
 
 export function PremiumExtras() {
@@ -22,51 +32,49 @@ export function PremiumExtras() {
     <Section id="premium-extras" tone="navy" compact>
       <div ref={ref}>
         <div className="section-intro">
-          <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.14em] text-orange-light text-center">
+          <p className="mb-2 inline-flex mx-auto rounded-full bg-orange px-3 py-1 text-[11px] font-bold uppercase tracking-[0.1em] text-white">
             Exclusivo do Premium
           </p>
-          <SectionTitle centered className="!text-white !text-[24px] sm:!text-[32px]">
-            Quer planejar e avaliar também?
+          <SectionTitle centered className="!text-white mt-3">
+            Quer também planejar e avaliar? Leve o sistema completo
           </SectionTitle>
-          <SectionLead centered className="!text-white/70 !text-[14px] sm:!text-[16px]">
-            Leve o sistema completo: avaliações, planos, mapas e linha do tempo.
+          <SectionLead centered className="!text-white/70">
+            Além das {offerConfig.NUMBER_OF_ACTIVITIES} atividades: avaliações,
+            planos de aula, planejamento e materiais visuais.
           </SectionLead>
         </div>
 
-        <div className="mt-6 grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-3">
-          {previewCovers.map((item) => (
-            <div
-              key={item.label}
+        <div className="mt-6 grid grid-cols-2 gap-2.5 sm:gap-3 max-w-3xl mx-auto">
+          {previewTiles.map((tile) => (
+            <figure
+              key={tile.label}
               className="overflow-hidden rounded-2xl border border-white/10 bg-white/5"
             >
-              <div className="aspect-[4/3] overflow-hidden">
-                <img
-                  src={item.src}
-                  alt={item.label}
-                  width={480}
-                  height={360}
-                  loading="lazy"
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <p className="px-2.5 py-2 text-center text-[12px] sm:text-[13px] font-semibold text-white/90">
-                {item.label}
-              </p>
-            </div>
+              <img
+                src={tile.src}
+                alt={tile.label}
+                width={480}
+                height={360}
+                loading="lazy"
+                className="aspect-[4/3] w-full object-cover"
+              />
+              <figcaption className="px-3 py-2 text-[13px] font-semibold text-white/90">
+                {tile.label}
+              </figcaption>
+            </figure>
           ))}
         </div>
 
-        <div className="mt-4 flex flex-wrap justify-center gap-2">
-          {offerConfig.PREMIUM_FUTURE_UPDATES ? (
-            <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-[12px] text-white/80">
-              Atualizações futuras do Premium
-            </span>
-          ) : null}
-          {offerConfig.PREMIUM_LIFETIME_ACCESS ? (
-            <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-[12px] text-white/80">
-              Acesso permanente ao conteúdo
-            </span>
-          ) : null}
+        <div className="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl mx-auto">
+          {offerConfig.PREMIUM_BONUSES.map((b) => (
+            <div
+              key={b.name}
+              className="rounded-xl border border-white/10 bg-white/5 px-3.5 py-3"
+            >
+              <p className="text-[14px] font-bold text-white">{b.name}</p>
+              <p className="mt-0.5 text-[12px] text-white/60">{b.description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </Section>
