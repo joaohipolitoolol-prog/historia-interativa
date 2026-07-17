@@ -6,16 +6,18 @@ type SectionProps = {
   className?: string
   containerClassName?: string
   as?: ElementType
-  tone?: 'warm' | 'cool' | 'white' | 'navy' | 'orange-soft'
+  tone?: 'cream' | 'cool' | 'white' | 'navy' | 'orange-soft' | 'green-soft' | 'warm'
   compact?: boolean
 }
 
 const tones: Record<NonNullable<SectionProps['tone']>, string> = {
-  warm: 'bg-warm',
+  cream: 'bg-cream',
+  warm: 'bg-cream',
   cool: 'bg-cool',
   white: 'bg-white',
   navy: 'bg-navy text-white',
   'orange-soft': 'bg-orange-soft',
+  'green-soft': 'bg-green-soft',
 }
 
 export function Section({
@@ -24,13 +26,13 @@ export function Section({
   className = '',
   containerClassName = '',
   as: Tag = 'section',
-  tone = 'warm',
+  tone = 'cream',
   compact = false,
 }: SectionProps) {
   return (
     <Tag
       id={id}
-      className={`${compact ? 'py-12 sm:py-14 md:py-16' : 'py-14 sm:py-16 md:py-20'} ${tones[tone]} ${className}`}
+      className={`${compact ? 'py-10 sm:py-12 md:py-14' : 'py-12 sm:py-14 md:py-16'} ${tones[tone]} ${className}`}
     >
       <div className={`container-page ${containerClassName}`}>{children}</div>
     </Tag>
@@ -66,7 +68,7 @@ export function SectionTitle({
 }) {
   return (
     <Tag
-      className={`text-[26px] sm:text-[32px] md:text-[38px] font-extrabold text-balance ${
+      className={`text-[26px] sm:text-[32px] md:text-[36px] font-extrabold text-balance ${
         centered ? 'text-center mx-auto' : ''
       } ${className}`}
     >
@@ -86,7 +88,7 @@ export function SectionLead({
 }) {
   return (
     <p
-      className={`mt-3 sm:mt-4 max-w-2xl text-[16px] sm:text-[17px] leading-relaxed text-muted ${
+      className={`mt-3 max-w-2xl text-[16px] sm:text-[17px] leading-relaxed text-muted ${
         centered ? 'text-center mx-auto' : ''
       } ${className}`}
     >

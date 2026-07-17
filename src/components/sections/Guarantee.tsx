@@ -10,29 +10,23 @@ export function Guarantee() {
   const ref = useInViewTrack('GuaranteeViewed')
 
   return (
-    <Section id="garantia" tone="white" compact>
+    <Section id="garantia" tone="green-soft" compact>
       <div
         ref={ref}
-        className="mx-auto max-w-3xl rounded-3xl border border-green/25 bg-green/5 p-6 sm:p-10 text-center"
+        className="mx-auto max-w-2xl text-center rounded-[24px] border border-green/20 bg-white/70 p-6 sm:p-8"
       >
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green text-white text-[22px] font-extrabold">
+        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-green text-white text-[20px] font-extrabold">
           {offerConfig.GUARANTEE_DAYS}
         </div>
-        <SectionTitle className="mt-5">
-          Conheça o material por {offerConfig.GUARANTEE_DAYS} dias
+        <SectionTitle centered className="mt-4">
+          Explore tudo por {offerConfig.GUARANTEE_DAYS} dias
         </SectionTitle>
-        <SectionLead className="mx-auto">
-          Após a compra, você poderá acessar o plano escolhido e conferir como
-          os materiais estão organizados.
+        <SectionLead centered>
+          Acesse o plano escolhido, conheça os materiais e veja como eles se
+          encaixam na sua rotina. Caso perceba que o produto não é para você,
+          solicite o reembolso dentro do prazo de {offerConfig.GUARANTEE_DAYS}{' '}
+          dias, conforme as condições informadas na plataforma.
         </SectionLead>
-        <div className="mt-4 space-y-3 text-[16px] leading-relaxed text-muted">
-          <p>
-            Caso perceba que o produto não atende ao que você procura, poderá
-            solicitar o reembolso dentro do prazo de {offerConfig.GUARANTEE_DAYS}{' '}
-            dias, conforme as regras da plataforma de pagamento.
-          </p>
-          <p className="font-semibold text-navy">O risco fica com a oferta.</p>
-        </div>
       </div>
     </Section>
   )

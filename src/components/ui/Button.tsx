@@ -13,26 +13,31 @@ import {
 import type { PlanId } from '@/config/offerConfig'
 import { trackEvent, type TrackEventName } from '@/lib/tracking'
 
-type SharedProps = {
+type Shared = {
   children: ReactNode
   variant?: 'primary' | 'secondary' | 'ghost'
   className?: string
   fullWidth?: boolean
 }
 
-type CheckoutButtonProps = SharedProps & {
+type CheckoutProps = Shared & {
   mode?: 'checkout'
   plan: PlanId
   position: CtaPosition
   trackAs?: TrackEventName
 } & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'children' | 'href'>
 
-type ScrollButtonProps = SharedProps & {
+type ScrollProps = Shared & {
   mode: 'scroll-to-plans'
   trackAs?: TrackEventName
 } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'>
 
-type ButtonProps = CheckoutButtonProps | ScrollButtonProps
+type ActionProps = Shared & {
+  mode: 'action'
+  trackAs?: TrackEventName
+} & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'>
+
+type ButtonProps = CheckoutProps | ScrollProps | ActionProps
 
 const variants = {
   primary:
@@ -49,11 +54,8 @@ export function Button(props: ButtonProps) {
     fullWidth = false,
   } = props
 
-  const base =
-    'inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-[16px] sm:text-[17px] font-bold tracking-wide transition-colors duration-200 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-orange disabled:opacity-60'
-
   const classes = [
-    base,
+    'inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-[16px] sm:text-[17px] font-bold tracking-wide transition-colors duration-200 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-orange',
     variants[variant],
     fullWidth ? 'w-full' : '',
     className,
@@ -62,7 +64,7 @@ export function Button(props: ButtonProps) {
     .join(' ')
 
   if (props.mode === 'scroll-to-plans') {
-    const { trackAs = 'StickyPlanSelectorClicked', onClick, ...rest } = props
+    const { trackAs = 'HeroCTASelected', onClick, ...rest } = props
     return (
       <button
         type="button"
@@ -79,35 +81,42 @@ export function Button(props: ButtonProps) {
     )
   }
 
-  const { plan, position, trackAs, onClick, ...rest } = props
+  if (props.mode === 'action') {
+    const { trackAs, onClick, ...rest } = props
+    return (
+      <button
+        type="button"
+        className={classes}
+        onClick={(e) => {
+          if (trackAs) trackEvent(trackAs)
+          onClick?.(e)
+        }}
+        {...rest}
+      >
+        {children}
+      </button>
+    )
+  }
 
+  const { plan, position, trackAs, onClick, ...rest } = props
   const href = buildCheckoutUrl(plan, position)
   const configured = isCheckoutConfigured(plan)
   const eventName: TrackEventName =
     trackAs ||
-    (plan === 'essential'
-      ? 'EssentialCheckoutClicked'
-      : 'PremiumCheckoutClicked')
+    (plan === 'premium' ? 'PremiumSelected' : 'CheckoutClicked')
 
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
-    trackEvent(eventName, {
-      selected_plan: plan,
-      cta_position: position,
-    })
+    trackEvent(eventName, { selected_plan: plan, cta_position: position })
     trackEvent('CheckoutClicked', {
       selected_plan: plan,
       cta_position: position,
     })
-
     if (!configured) {
       e.preventDefault()
       if (import.meta.env.DEV) {
-        alert(
-          `Checkout do plano ${plan === 'essential' ? 'Essencial' : 'Premium'} ainda não está configurado.\n\nAbra src/config/offerConfig.ts e cole ESSENTIAL_CHECKOUT_URL ou PREMIUM_CHECKOUT_URL.`,
-        )
+        alert(`Checkout ${plan} não configurado em offerConfig.ts`)
       }
     }
-
     onClick?.(e)
   }
 

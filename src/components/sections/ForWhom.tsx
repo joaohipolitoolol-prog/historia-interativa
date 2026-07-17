@@ -1,3 +1,4 @@
+import { offerConfig } from '@/config/offerConfig'
 import {
   Section,
   SectionLead,
@@ -28,7 +29,7 @@ const notForYou = [
 export function ForWhom() {
   return (
     <Section id="para-quem" tone="warm">
-      <SectionTitle>O História Interativa é para você que...</SectionTitle>
+      <SectionTitle>O {offerConfig.PRODUCT_NAME} é para você que...</SectionTitle>
       <SectionLead>
         Feito para quem precisa de material organizado e aplicável, não de mais
         ideias soltas.

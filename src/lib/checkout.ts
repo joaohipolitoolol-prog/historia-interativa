@@ -2,18 +2,14 @@ import { offerConfig, type PlanId } from '@/config/offerConfig'
 
 export type CtaPosition =
   | 'hero'
-  | 'after_mechanism'
-  | 'after_previews'
-  | 'after_included'
   | 'pricing_essential'
   | 'pricing_premium'
+  | 'plus_modal_accept'
+  | 'plus_modal_decline'
   | 'sticky'
-  | 'sticky_essential'
-  | 'sticky_premium'
   | 'final'
-  | 'final_essential'
-  | 'final_premium'
-  | 'plan_comparison'
+  | 'after_preview'
+  | 'after_essential'
 
 const UTM_KEYS = [
   'utm_source',
@@ -38,26 +34,18 @@ function getCurrentSearchParams(): URLSearchParams {
   return new URLSearchParams(window.location.search)
 }
 
-function getCheckoutBase(plan?: PlanId): string {
+function getCheckoutBase(plan: PlanId): string {
   if (plan === 'essential') return offerConfig.ESSENTIAL_CHECKOUT_URL
-  if (plan === 'premium') return offerConfig.PREMIUM_CHECKOUT_URL
-  return ''
+  if (plan === 'plus') return offerConfig.PLUS_CHECKOUT_URL
+  return offerConfig.PREMIUM_CHECKOUT_URL
 }
 
-/**
- * Monta a URL de checkout do plano escolhido, preservando UTMs.
- */
-export function buildCheckoutUrl(
-  plan: PlanId,
-  position: CtaPosition,
-): string {
+export function buildCheckoutUrl(plan: PlanId, position: CtaPosition): string {
   const base = getCheckoutBase(plan)
 
   if (!base) {
     if (import.meta.env.DEV) {
-      console.warn(
-        `[checkout] Checkout do plano "${plan}" não configurado. Posição: ${position}`,
-      )
+      console.warn(`[checkout] Checkout "${plan}" não configurado (${position})`)
     }
     return `#checkout-${plan}-nao-configurado`
   }
@@ -73,11 +61,11 @@ export function buildCheckoutUrl(
       }
     }
 
-    const pageVariant =
-      current.get('page_variant') || offerConfig.OFFER_VARIANT
-
     url.searchParams.set('selected_plan', plan)
-    url.searchParams.set('page_variant', pageVariant)
+    url.searchParams.set(
+      'page_variant',
+      current.get('page_variant') || offerConfig.OFFER_VARIANT,
+    )
     url.searchParams.set('cta_position', position)
     url.searchParams.set('device_type', getDeviceType())
 
@@ -85,12 +73,10 @@ export function buildCheckoutUrl(
   } catch {
     const current = getCurrentSearchParams()
     const params = new URLSearchParams()
-
     for (const key of UTM_KEYS) {
       const value = current.get(key)
       if (value) params.set(key, value)
     }
-
     params.set('selected_plan', plan)
     params.set(
       'page_variant',
@@ -98,7 +84,6 @@ export function buildCheckoutUrl(
     )
     params.set('cta_position', position)
     params.set('device_type', getDeviceType())
-
     const separator = base.includes('?') ? '&' : '?'
     return `${base}${separator}${params.toString()}`
   }
@@ -109,8 +94,21 @@ export function isCheckoutConfigured(plan: PlanId): boolean {
 }
 
 export function scrollToPlans(): void {
-  const el = document.getElementById('planos')
-  if (el) {
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  document.getElementById('planos')?.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start',
+  })
+}
+
+export function openCheckout(plan: PlanId, position: CtaPosition): void {
+  const href = buildCheckoutUrl(plan, position)
+  if (!isCheckoutConfigured(plan)) {
+    if (import.meta.env.DEV) {
+      alert(
+        `Checkout do plano ${plan} ainda não configurado.\n\nConfigure em src/config/offerConfig.ts`,
+      )
+    }
+    return
   }
+  window.location.href = href
 }

@@ -3,24 +3,24 @@ import { offerConfig } from '@/config/offerConfig'
 export type TrackEventName =
   | 'PageViewed'
   | 'HeroViewed'
+  | 'HeroCTASelected'
   | 'PrimaryCTAViewed'
   | 'PrimaryCTAClicked'
   | 'MechanismViewed'
   | 'ProductPreviewViewed'
-  | 'BonusViewed'
   | 'PremiumBonusesViewed'
-  | 'OfferViewed'
   | 'PlansViewed'
-  | 'EssentialPlanViewed'
-  | 'PremiumPlanViewed'
-  | 'PlanComparisonViewed'
+  | 'EssentialSelected'
+  | 'PlusModalViewed'
+  | 'PlusAccepted'
+  | 'PlusDeclined'
+  | 'PremiumSelected'
   | 'CheckoutClicked'
   | 'EssentialCheckoutClicked'
   | 'PremiumCheckoutClicked'
   | 'FAQOpened'
   | 'GuaranteeViewed'
   | 'StickyCTAViewed'
-  | 'StickyCTAClicked'
   | 'StickyPlanSelectorClicked'
   | 'SupportClicked'
   | 'Page75Viewed'
@@ -43,20 +43,13 @@ export function initAnalytics(): void {
   if (analyticsInitialized || typeof window === 'undefined') return
   analyticsInitialized = true
 
-  const { META_PIXEL_ID, GA_MEASUREMENT_ID } = offerConfig
-
-  if (META_PIXEL_ID) {
-    loadMetaPixel(META_PIXEL_ID)
-  }
-
-  if (GA_MEASUREMENT_ID) {
-    loadGoogleAnalytics(GA_MEASUREMENT_ID)
-  }
+  if (offerConfig.META_PIXEL_ID) loadMetaPixel(offerConfig.META_PIXEL_ID)
+  if (offerConfig.GA_MEASUREMENT_ID)
+    loadGoogleAnalytics(offerConfig.GA_MEASUREMENT_ID)
 }
 
 function loadMetaPixel(pixelId: string): void {
   if (window.fbq) return
-
   const script = document.createElement('script')
   script.async = true
   script.src = 'https://connect.facebook.net/en_US/fbevents.js'
@@ -72,11 +65,8 @@ function loadMetaPixel(pixelId: string): void {
 
   const stub = ((...args: unknown[]) => {
     const fn = stub as FbqStub
-    if (fn.callMethod) {
-      fn.callMethod(...args)
-    } else {
-      fn.queue.push(args)
-    }
+    if (fn.callMethod) fn.callMethod(...args)
+    else fn.queue.push(args)
   }) as FbqStub
 
   stub.queue = []
@@ -84,21 +74,18 @@ function loadMetaPixel(pixelId: string): void {
   stub.loaded = true
   stub.version = '2.0'
   window.fbq = stub
-
   window.fbq('init', pixelId)
   window.fbq('track', 'PageView')
 }
 
 function loadGoogleAnalytics(measurementId: string): void {
   if (document.getElementById('ga-script')) return
-
   window.dataLayer = window.dataLayer || []
   window.gtag = function gtag(...args: unknown[]) {
     window.dataLayer?.push(args)
   }
   window.gtag('js', new Date())
   window.gtag('config', measurementId, { send_page_view: true })
-
   const script = document.createElement('script')
   script.id = 'ga-script'
   script.async = true
@@ -106,9 +93,6 @@ function loadGoogleAnalytics(measurementId: string): void {
   document.head.appendChild(script)
 }
 
-/**
- * Dispara eventos personalizados. Nunca dispara Purchase na landing.
- */
 export function trackEvent(
   eventName: TrackEventName,
   properties: TrackProperties = {},
@@ -123,20 +107,19 @@ export function trackEvent(
   const payload = {
     ...properties,
     product: offerConfig.PRODUCT_NAME,
+    brand: offerConfig.BRAND_NAME,
     page_variant: offerConfig.OFFER_VARIANT,
     timestamp: Date.now(),
   }
 
-  if (import.meta.env.DEV) {
-    console.info(`[track] ${eventName}`, payload)
-  }
+  if (import.meta.env.DEV) console.info(`[track] ${eventName}`, payload)
 
   try {
     if (window.fbq && offerConfig.META_PIXEL_ID) {
       window.fbq('trackCustom', eventName, payload)
     }
   } catch {
-    // silencioso
+    /* silent */
   }
 
   try {
@@ -144,6 +127,6 @@ export function trackEvent(
       window.gtag('event', eventName, payload)
     }
   } catch {
-    // silencioso
+    /* silent */
   }
 }

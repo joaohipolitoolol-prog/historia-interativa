@@ -3,38 +3,33 @@
 @theme {
   --color-orange: #FF5A1F;
   --color-orange-light: #FF8A3D;
+  --color-orange-soft: #FFEEE6;
   --color-yellow: #FFC83D;
-  --color-green: #10B981;
+  --color-green: #0DAE78;
+  --color-green-soft: #E8F8F1;
   --color-navy: #172033;
-  --color-warm: #FFF9F4;
-  --color-cool: #F3F8FC;
-  --color-ink: #201A17;
-  --color-muted: #625B56;
+  --color-cream: #FFF8F2;
+  --color-warm: #FFF8F2;
+  --color-cool: #EFF7FF;
+  --color-ink: #172033;
+  --color-muted: #667085;
   --color-white: #FFFFFF;
   --color-border: #E8DFD6;
-  --color-orange-soft: #FFF1E8;
 
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Manrope", ui-sans-serif, system-ui, sans-serif;
 
-  --shadow-soft: 0 12px 40px rgba(32, 26, 23, 0.07);
-  --shadow-lift: 0 18px 50px rgba(32, 26, 23, 0.1);
+  --shadow-soft: 0 12px 40px rgba(23, 32, 51, 0.07);
+  --shadow-lift: 0 20px 50px rgba(23, 32, 51, 0.12);
   --shadow-cta: 0 12px 32px rgba(255, 90, 31, 0.32);
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
+  html { scroll-behavior: smooth; }
 
   @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-
-    *,
-    *::before,
-    *::after {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
@@ -45,11 +40,10 @@
     margin: 0;
     font-family: var(--font-sans);
     color: var(--color-ink);
-    background: var(--color-warm);
+    background: var(--color-cream);
     font-size: 16px;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
   }
 
   h1, h2, h3, h4 {
@@ -64,11 +58,7 @@
     outline-offset: 3px;
   }
 
-  img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-  }
+  img { max-width: 100%; height: auto; display: block; }
 }
 
 @layer utilities {
@@ -78,41 +68,17 @@
     margin-inline: auto;
     padding-inline: 1.25rem;
   }
-
   @media (min-width: 768px) {
-    .container-page {
-      padding-inline: 2rem;
-    }
+    .container-page { padding-inline: 2rem; }
   }
-
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  .fade-up {
-    animation: fadeUp 0.65s ease both;
-  }
-
+  .text-balance { text-wrap: balance; }
+  .fade-up { animation: fadeUp 0.65s ease both; }
   @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(14px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
   }
-
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
   .section-intro {
     max-width: 40rem;
     margin-inline: auto;

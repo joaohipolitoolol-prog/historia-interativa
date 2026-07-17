@@ -15,7 +15,7 @@ export function Author() {
 
   return (
     <Section id="autor" tone="white">
-      <SectionTitle>Quem organizou o História Interativa</SectionTitle>
+      <SectionTitle>Quem organizou o {offerConfig.PRODUCT_NAME}</SectionTitle>
       <SectionLead>
         Informações reais sobre a pessoa responsável pela organização do
         material.

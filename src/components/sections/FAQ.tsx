@@ -8,45 +8,43 @@ import { Accordion } from '@/components/ui/Accordion'
 
 const faqItems = [
   {
-    question: 'Qual é a diferença entre Essencial e Premium?',
+    question: 'Qual a diferença entre Essencial e Premium?',
     answer:
-      'O Essencial inclui a biblioteca principal com mais de 500 atividades. O Premium inclui tudo do Essencial e adiciona avaliações, planos de aula, planejamento anual, materiais visuais extras e o guia de aulas participativas.',
+      'O Essencial inclui as mais de 500 atividades. O Premium inclui as atividades e adiciona avaliações, planos de aula, planejamento anual, mapas, linhas do tempo e o guia de aulas participativas.',
   },
   {
     question: 'O plano de R$ 10 inclui mesmo as 500 atividades?',
     answer:
-      'Sim. O Plano Essencial entrega o acervo principal com mais de 500 atividades. Os extras de avaliação e planejamento estão no Premium.',
+      'Sim. O Essencial entrega o acervo principal anunciado. Avaliações, planos de aula, planejamento e materiais visuais extras estão no Premium.',
   },
   {
     question: 'Como recebo o material?',
     answer:
-      'Após a confirmação do pagamento, você recebe o acesso digital pela plataforma utilizada na compra.',
+      'Após a confirmação do pagamento, o acesso digital é liberado pela plataforma utilizada na compra.',
   },
   {
     question: 'Existe mensalidade?',
-    answer: 'Não. Os dois planos têm pagamento único.',
+    answer: 'Não. Todos os planos têm pagamento único.',
   },
   {
-    question: 'Os materiais extras do checkout são obrigatórios?',
+    question: 'O Pack de Slides é obrigatório?',
     answer:
-      'Não. Os order bumps no checkout são opcionais e separados do Premium.',
+      'Não. O order bump no checkout é opcional e separado dos planos.',
   },
   {
     question: 'Tem garantia?',
-    answer: `Sim. Você pode solicitar reembolso em até ${offerConfig.GUARANTEE_DAYS} dias, conforme as regras da plataforma de pagamento.`,
+    answer: `Sim. Você pode solicitar reembolso em até ${offerConfig.GUARANTEE_DAYS} dias, conforme as regras da plataforma.`,
   },
 ]
 
 export function FAQ() {
   return (
-    <Section id="faq" tone="warm" compact>
+    <Section id="faq" tone="white" compact>
       <div className="section-intro">
         <SectionTitle centered>Perguntas frequentes</SectionTitle>
-        <SectionLead centered>
-          Respostas rápidas sobre planos, acesso e garantia.
-        </SectionLead>
+        <SectionLead centered>Planos, acesso e garantia.</SectionLead>
       </div>
-      <div className="mt-8 max-w-3xl mx-auto">
+      <div className="mt-7 max-w-3xl mx-auto">
         <Accordion items={faqItems} />
       </div>
     </Section>
