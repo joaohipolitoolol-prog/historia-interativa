@@ -3,6 +3,7 @@ import { LandingPage } from '@/pages/LandingPage'
 import { Termos } from '@/pages/Termos'
 import { Privacidade } from '@/pages/Privacidade'
 import { Contato } from '@/pages/Contato'
+import { Obrigado } from '@/pages/Obrigado'
 import { ScrollToTop } from '@/components/layout/ScrollToTop'
 
 export default function App() {
@@ -11,6 +12,7 @@ export default function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/obrigado" element={<Obrigado />} />
         <Route path="/termos" element={<Termos />} />
         <Route path="/privacidade" element={<Privacidade />} />
         <Route path="/contato" element={<Contato />} />

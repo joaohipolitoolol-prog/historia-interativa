@@ -52,7 +52,7 @@ function buildClassName(
   className: string,
 ) {
   return [
-    'inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-[16px] sm:text-[17px] font-bold tracking-wide transition-colors duration-200 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-orange',
+    'inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-[15px] sm:text-[16px] font-bold tracking-wide transition-colors duration-200 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-orange',
     variants[variant],
     fullWidth ? 'w-full' : '',
     className,
@@ -70,7 +70,7 @@ export function Button(props: ButtonProps) {
   if (props.mode === 'scroll-to-plans') {
     const {
       children,
-      trackAs = 'HeroCTASelected',
+      trackAs = 'HeroCTAClicked',
       onClick,
       mode: _mode,
       variant: _variant,
@@ -139,7 +139,9 @@ export function Button(props: ButtonProps) {
   const configured = isCheckoutConfigured(plan)
   const eventName: TrackEventName =
     trackAs ||
-    (plan === 'premium' ? 'PremiumSelected' : 'CheckoutClicked')
+    (plan === 'premium'
+      ? 'PremiumCheckoutClicked'
+      : 'EssentialCheckoutClicked')
 
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
     trackEvent(eventName, { selected_plan: plan, cta_position: position })
@@ -150,7 +152,9 @@ export function Button(props: ButtonProps) {
     if (!configured) {
       e.preventDefault()
       if (import.meta.env.DEV) {
-        alert(`Checkout ${plan} não configurado em offerConfig.ts`)
+        console.warn(
+          `[checkout] Configure ${plan === 'essential' ? 'ESSENTIAL' : 'PREMIUM'}_CHECKOUT_URL em offerConfig.ts`,
+        )
       }
     }
     onClick?.(e)

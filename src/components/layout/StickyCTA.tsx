@@ -12,10 +12,12 @@ export function StickyCTA() {
     if (!offerConfig.SHOW_STICKY_CTA) return undefined
     const update = () => {
       const hero = document.getElementById('hero')
+      const faq = document.getElementById('faq')
       const pastHero = hero
         ? hero.getBoundingClientRect().bottom < 8
         : window.scrollY > 480
-      setVisible(pastHero)
+      const nearFaq = faq ? faq.getBoundingClientRect().top < window.innerHeight : false
+      setVisible(pastHero && !nearFaq)
       if (pastHero && !trackedRef.current) {
         trackedRef.current = true
         trackEvent('StickyCTAViewed', {}, { once: true })
@@ -33,18 +35,16 @@ export function StickyCTA() {
       <div className="container-page flex items-center gap-2 py-2.5 sm:gap-3 sm:py-3">
         <div className="min-w-0 flex-1">
           <p className="truncate text-[14px] font-semibold text-navy">
-            A partir de {offerConfig.ENTRY_PRICE}
-          </p>
-          <p className="truncate text-[12px] text-muted sm:text-[13px]">
-            Essencial ou Premium
+            {offerConfig.NUMBER_OF_ACTIVITIES} atividades a partir de{' '}
+            {offerConfig.ENTRY_PRICE}
           </p>
         </div>
         <Button
           mode="scroll-to-plans"
-          trackAs="StickyPlanSelectorClicked"
-          className="shrink-0 !px-3.5 !py-2.5 text-[13px] sm:!px-4 sm:!py-3 sm:text-[14px]"
+          trackAs="StickyCTAClicked"
+          className="shrink-0 !px-4 !py-2.5 text-[14px]"
         >
-          ESCOLHER
+          VER PLANOS
         </Button>
         <button
           type="button"

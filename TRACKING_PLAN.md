@@ -1,29 +1,30 @@
-# Tracking Plan (atualizado — dois planos)
+# Tracking — Aula Viva História
 
-## Eventos novos
+Função: `trackEvent(eventName, properties)` em `src/lib/tracking.ts`.
 
-| Evento | Quando |
-|---|---|
-| PlansViewed | Seção `#planos` visível |
-| EssentialPlanViewed | Card Essencial visível |
-| PremiumPlanViewed | Card Premium visível |
-| PlanComparisonViewed | Comparativo visível |
-| PremiumBonusesViewed | Extras Premium visíveis |
-| EssentialCheckoutClicked | Clique checkout Essencial |
-| PremiumCheckoutClicked | Clique checkout Premium |
-| StickyPlanSelectorClicked | Sticky “Escolher meu plano” |
+## Eventos
 
-## Params no checkout
+| Evento | Onde |
+|--------|------|
+| PageViewed | Load da LP |
+| HeroCTAClicked | CTA hero / final (scroll aos planos) |
+| ProductPreviewViewed | Seção prévia em view |
+| ProductPreviewOpened | Clique em imagem (`preview_name`) |
+| MechanismViewed | Seção sistema |
+| EssentialViewed | Bloco Essencial |
+| PremiumViewed | Bloco Premium |
+| PlansViewed | Cards de preço |
+| EssentialCheckoutClicked | Botão Essencial |
+| PremiumCheckoutClicked | Botão Premium |
+| GuaranteeViewed | Garantia |
+| FAQOpened | Accordion FAQ |
+| StickyCTAClicked | Barra fixa |
+| ThankYouPageViewed | `/obrigado` |
+| WhatsAppSupportClicked | Botão WhatsApp |
 
-`buildCheckoutUrl(plan, position)` adiciona:
+## Regras
 
-- `selected_plan` = `essential` | `premium`
-- `cta_position`
-- `page_variant`
-- `device_type`
-- UTMs + fbclid/gclid
-
-## Não disparar
-
-- `Purchase` na landing
-- Dados pessoais
+- Não disparar `Purchase` na landing
+- Clique no checkout ≠ venda
+- Não enviar dados pessoais
+- UTMs preservadas via `buildCheckoutUrl`

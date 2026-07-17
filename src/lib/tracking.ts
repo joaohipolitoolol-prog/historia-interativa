@@ -3,27 +3,29 @@ import { offerConfig } from '@/config/offerConfig'
 export type TrackEventName =
   | 'PageViewed'
   | 'HeroViewed'
+  | 'HeroCTAClicked'
   | 'HeroCTASelected'
   | 'PrimaryCTAViewed'
-  | 'PrimaryCTAClicked'
-  | 'MechanismViewed'
   | 'ProductPreviewViewed'
-  | 'PremiumBonusesViewed'
+  | 'ProductPreviewOpened'
+  | 'MechanismViewed'
+  | 'EssentialViewed'
+  | 'PremiumViewed'
   | 'PlansViewed'
-  | 'EssentialSelected'
-  | 'PlusModalViewed'
-  | 'PlusAccepted'
-  | 'PlusDeclined'
-  | 'PremiumSelected'
-  | 'CheckoutClicked'
   | 'EssentialCheckoutClicked'
   | 'PremiumCheckoutClicked'
-  | 'FAQOpened'
-  | 'KeywordsModalOpened'
+  | 'CheckoutClicked'
+  | 'EssentialSelected'
+  | 'PremiumSelected'
   | 'GuaranteeViewed'
+  | 'FAQOpened'
   | 'StickyCTAViewed'
+  | 'StickyCTAClicked'
   | 'StickyPlanSelectorClicked'
   | 'SupportClicked'
+  | 'ThankYouPageViewed'
+  | 'WhatsAppSupportClicked'
+  | 'KeywordsModalOpened'
   | 'Page75Viewed'
   | 'PageCompleted'
 
@@ -43,7 +45,6 @@ const firedOnce = new Set<string>()
 export function initAnalytics(): void {
   if (analyticsInitialized || typeof window === 'undefined') return
   analyticsInitialized = true
-
   if (offerConfig.META_PIXEL_ID) loadMetaPixel(offerConfig.META_PIXEL_ID)
   if (offerConfig.GA_MEASUREMENT_ID)
     loadGoogleAnalytics(offerConfig.GA_MEASUREMENT_ID)
@@ -109,7 +110,6 @@ export function trackEvent(
     ...properties,
     product: offerConfig.PRODUCT_NAME,
     brand: offerConfig.BRAND_NAME,
-    page_variant: offerConfig.OFFER_VARIANT,
     timestamp: Date.now(),
   }
 

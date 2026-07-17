@@ -8,32 +8,42 @@ import { Accordion } from '@/components/ui/Accordion'
 
 const faqItems = [
   {
-    question: 'Qual a diferença entre Essencial e Premium?',
+    question: 'Qual é a diferença entre Essencial e Premium?',
     answer:
-      'O Essencial inclui as mais de 500 atividades. O Premium inclui as atividades e adiciona avaliações, planos de aula, planejamento anual, mapas, linhas do tempo e o guia de aulas participativas.',
+      'O Essencial inclui o acervo principal com mais de 500 atividades. O Premium inclui tudo do Essencial e adiciona avaliações, planos de aula, planejamento anual e materiais extras.',
   },
   {
-    question: 'O plano de R$ 10 inclui mesmo as 500 atividades?',
+    question: 'O plano de R$ 10 inclui mesmo as 500+ atividades?',
     answer:
-      'Sim. O Essencial entrega o acervo principal anunciado. Avaliações, planos de aula, planejamento e materiais visuais extras estão no Premium.',
+      'Sim. O Plano Essencial entrega o acervo principal com as mais de 500 atividades anunciadas.',
   },
   {
     question: 'Como recebo o material?',
     answer:
-      'Após a confirmação do pagamento, o acesso digital é liberado pela plataforma utilizada na compra.',
+      'O acesso é liberado após a confirmação do pagamento. Você receberá as orientações pelo e-mail informado na compra.',
   },
   {
     question: 'Existe mensalidade?',
-    answer: 'Não. Todos os planos têm pagamento único.',
+    answer: 'Não. Os dois planos possuem pagamento único.',
   },
   {
-    question: 'O Pack de Slides é obrigatório?',
+    question: 'Preciso imprimir tudo?',
     answer:
-      'Não. O order bump no checkout é opcional e separado dos planos.',
+      'Não. Você pode imprimir apenas os materiais desejados. Alguns conteúdos também podem ser projetados.',
+  },
+  {
+    question: 'Funciona para quais turmas?',
+    answer:
+      'O acervo reúne materiais para diferentes conteúdos do Ensino Fundamental e Médio. O professor deve selecionar os materiais adequados à realidade da turma.',
   },
   {
     question: 'Tem garantia?',
-    answer: `Sim. Você pode solicitar reembolso em até ${offerConfig.GUARANTEE_DAYS} dias, conforme as regras da plataforma.`,
+    answer: `Sim. Você terá ${offerConfig.GUARANTEE_DAYS} dias para conhecer o produto e solicitar o reembolso dentro do prazo, conforme as condições da plataforma.`,
+  },
+  {
+    question: 'Os produtos adicionais do checkout são obrigatórios?',
+    answer:
+      'Não. Qualquer produto adicional apresentado no checkout é opcional.',
   },
 ]
 
@@ -44,7 +54,7 @@ export function FAQ() {
         <SectionTitle centered>Perguntas frequentes</SectionTitle>
         <SectionLead centered>Planos, acesso e garantia.</SectionLead>
       </div>
-      <div className="mt-7 max-w-3xl mx-auto">
+      <div className="mt-6 max-w-3xl mx-auto">
         <Accordion items={faqItems} />
       </div>
     </Section>

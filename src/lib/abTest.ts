@@ -2,7 +2,6 @@ import { offerConfig, type HeadlineVariant, type OfferVariant } from '@/config/o
 
 const HEADLINE_KEY = 'av_headline_variant'
 const VARIANTS: HeadlineVariant[] = ['A', 'B', 'C']
-const OFFER_VARIANTS: OfferVariant[] = ['two_plans', 'short_two_plans']
 
 export function getHeadlineVariant(): HeadlineVariant {
   if (typeof window === 'undefined') return 'A'
@@ -35,11 +34,5 @@ export function applyUrlOverrides(): {
   if (headlineParam && VARIANTS.includes(headlineParam)) {
     localStorage.setItem(HEADLINE_KEY, headlineParam)
   }
-  const pageParam = params.get('page_variant') as OfferVariant | null
-  const pageVariant =
-    pageParam && OFFER_VARIANTS.includes(pageParam)
-      ? pageParam
-      : offerConfig.OFFER_VARIANT
-
-  return { headline: getHeadlineVariant(), pageVariant }
+  return { headline: getHeadlineVariant(), pageVariant: offerConfig.OFFER_VARIANT }
 }

@@ -1,15 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useABTest } from '@/hooks/useABTest'
 import { initAnalytics, trackEvent } from '@/lib/tracking'
 
 import { OfferBar } from '@/components/layout/OfferBar'
 import { Footer } from '@/components/layout/Footer'
 import { StickyCTA } from '@/components/layout/StickyCTA'
-import { PlusModal } from '@/components/ui/PlusModal'
 
 import { Hero } from '@/components/sections/Hero'
-import { ProblemMechanism } from '@/components/sections/ProblemMechanism'
 import { ProductDemo } from '@/components/sections/ProductDemo'
+import { ProblemMechanism } from '@/components/sections/ProblemMechanism'
 import { WhatsIncluded } from '@/components/sections/WhatsIncluded'
 import { PremiumExtras } from '@/components/sections/PremiumExtras'
 import { Pricing } from '@/components/sections/Pricing'
@@ -19,7 +18,6 @@ import { FinalCTA } from '@/components/sections/FinalCTA'
 
 export function LandingPage() {
   const { ready, headline } = useABTest()
-  const [plusOpen, setPlusOpen] = useState(false)
 
   useEffect(() => {
     initAnalytics()
@@ -66,11 +64,11 @@ export function LandingPage() {
 
       <main>
         <Hero headline={headline} />
-        <ProblemMechanism />
         <ProductDemo />
+        <ProblemMechanism />
         <WhatsIncluded />
         <PremiumExtras />
-        <Pricing onEssentialClick={() => setPlusOpen(true)} />
+        <Pricing />
         <Guarantee />
         <FAQ />
         <FinalCTA />
@@ -78,7 +76,6 @@ export function LandingPage() {
 
       <Footer />
       <StickyCTA />
-      <PlusModal open={plusOpen} onClose={() => setPlusOpen(false)} />
     </div>
   )
 }

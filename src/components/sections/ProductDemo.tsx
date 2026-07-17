@@ -7,53 +7,64 @@ import {
 } from '@/components/ui/Section'
 import { Lightbox } from '@/components/ui/Lightbox'
 import { useInViewTrack } from '@/hooks/useInViewTrack'
+import { trackEvent } from '@/lib/tracking'
 
 export function ProductDemo() {
   const ref = useInViewTrack('ProductPreviewViewed')
-  const [active, setActive] = useState<{
-    src: string
-    alt: string
-    caption: string
-  } | null>(null)
+  const images = offerConfig.PRODUCT_PREVIEW_IMAGES
+  const [open, setOpen] = useState(false)
+  const [index, setIndex] = useState(0)
+
+  const lightboxImages = images.map((img) => ({
+    src: img.full,
+    alt: img.alt,
+    caption: img.caption,
+  }))
 
   return (
     <Section id="previas" tone="white" compact>
       <div ref={ref}>
         <div className="section-intro">
           <SectionTitle centered>
-            Veja o que você poderá usar nas suas aulas
+            Veja alguns materiais antes de escolher seu acesso
           </SectionTitle>
           <SectionLead centered>
-            Prévia dos materiais — toque para ampliar.
+            Clique em uma imagem para visualizar em tamanho maior.
           </SectionLead>
         </div>
 
-        <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3">
-          {offerConfig.PRODUCT_PREVIEW_IMAGES.map((image) => (
+        <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
+          {images.map((image, i) => (
             <button
-              key={image.caption}
+              key={image.id}
               type="button"
-              onClick={() =>
-                setActive({
-                  src: image.src,
-                  alt: image.alt,
-                  caption: image.caption,
+              onClick={() => {
+                setIndex(i)
+                setOpen(true)
+                trackEvent('ProductPreviewOpened', {
+                  preview_name: image.caption,
                 })
-              }
+              }}
               className="group text-left"
               aria-label={`Ampliar: ${image.caption}`}
             >
-              <div className="aspect-[4/3] overflow-hidden rounded-2xl border border-border bg-cool">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border bg-cool shadow-[var(--shadow-soft)]">
                 <img
-                  src={image.src}
+                  src={image.thumb}
                   alt={image.alt}
                   width={480}
                   height={360}
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform group-hover:scale-[1.03]"
                 />
+                <span
+                  aria-hidden="true"
+                  className="absolute bottom-2 right-2 rounded-full bg-navy/75 px-2 py-1 text-[12px] text-white"
+                >
+                  ↗
+                </span>
               </div>
-              <p className="mt-2 text-[15px] font-semibold text-navy">
+              <p className="mt-2 text-[14px] sm:text-[15px] font-semibold text-navy">
                 {image.caption}
               </p>
             </button>
@@ -61,11 +72,11 @@ export function ProductDemo() {
         </div>
 
         <Lightbox
-          open={Boolean(active)}
-          src={active?.src || ''}
-          alt={active?.alt || ''}
-          caption={active?.caption}
-          onClose={() => setActive(null)}
+          open={open}
+          images={lightboxImages}
+          index={index}
+          onClose={() => setOpen(false)}
+          onChangeIndex={setIndex}
         />
       </div>
     </Section>

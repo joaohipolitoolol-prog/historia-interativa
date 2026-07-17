@@ -6,10 +6,26 @@ import {
 import { useInViewTrack } from '@/hooks/useInViewTrack'
 
 const steps = [
-  { n: '1', t: 'Escolha o tema' },
-  { n: '2', t: 'Abra a atividade' },
-  { n: '3', t: 'Imprima ou projete' },
-  { n: '4', t: 'Aplique com a turma' },
+  {
+    n: '1',
+    t: 'Escolha o tema',
+    d: 'Encontre o conteúdo que será trabalhado.',
+  },
+  {
+    n: '2',
+    t: 'Abra a atividade',
+    d: 'Consulte o material pronto.',
+  },
+  {
+    n: '3',
+    t: 'Imprima ou projete',
+    d: 'Escolha como aplicar com a turma.',
+  },
+  {
+    n: '4',
+    t: 'Aplique na aula',
+    d: 'Use individualmente, em grupos ou como revisão.',
+  },
 ]
 
 export function ProblemMechanism() {
@@ -23,23 +39,23 @@ export function ProblemMechanism() {
         </SectionTitle>
         <SectionLead centered>
           Entre corrigir atividades, organizar notas e lidar com várias turmas,
-          você ainda precisa procurar textos, imagens e exercícios. O Sistema
-          Aula Pronta organiza essa parte para você.
+          você ainda precisa procurar textos, imagens e exercícios para a
+          próxima aula. O Sistema Aula Pronta reúne essa parte em um único
+          acesso para você não precisar começar tudo do zero novamente.
         </SectionLead>
       </div>
 
-      <ol className="mt-8 grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <ol className="mt-7 grid grid-cols-2 gap-3 lg:grid-cols-4">
         {steps.map((s) => (
           <li
             key={s.n}
-            className="rounded-2xl border border-border bg-white p-4 sm:p-5 text-center shadow-[var(--shadow-soft)]"
+            className="rounded-2xl border border-border bg-white p-4 text-left shadow-[var(--shadow-soft)]"
           >
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-orange text-white text-[15px] font-extrabold">
+            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-orange text-white text-[14px] font-extrabold">
               {s.n}
             </span>
-            <p className="mt-3 text-[15px] sm:text-[16px] font-bold text-navy">
-              {s.t}
-            </p>
+            <p className="mt-2.5 text-[15px] font-bold text-navy">{s.t}</p>
+            <p className="mt-1 text-[14px] leading-snug text-muted">{s.d}</p>
           </li>
         ))}
       </ol>
