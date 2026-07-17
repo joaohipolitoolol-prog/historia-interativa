@@ -46,7 +46,7 @@ export const offerConfig = {
   WHATSAPP_URL:
     'https://wa.me/447402867442?text=Oi%2C%20comprei%20o%20Aula%20Viva%20Hist%C3%B3ria%20e%20preciso%20de%20ajuda%20com%20meu%20acesso.',
 
-  META_PIXEL_ID: '',
+  META_PIXEL_ID: '1533521078177669',
   GA_MEASUREMENT_ID: '',
 
   LOGO_HORIZONTAL: '/brand/logo-horizontal.svg',
