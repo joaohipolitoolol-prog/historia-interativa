@@ -1,32 +1,27 @@
 import { Link } from 'react-router-dom'
 import { offerConfig } from '@/config/offerConfig'
+import { BrandLogo } from '@/components/ui/BrandLogo'
 import { trackEvent } from '@/lib/tracking'
 
 export function Footer() {
   return (
     <footer className="border-t border-border bg-navy text-white">
-      <div className="container-page py-10">
+      <div className="container-page py-8 sm:py-10">
         <div className="grid gap-8 md:grid-cols-[1.4fr_1fr]">
           <div>
-            <img
-              src={offerConfig.LOGO_HORIZONTAL_DARK}
-              alt={offerConfig.BRAND_NAME}
-              width={180}
-              height={36}
-              className="h-9 w-auto"
-            />
-            <p className="mt-3 text-[15px] text-white/70">
-              {offerConfig.PRODUCT_NAME} — {offerConfig.PRODUCT_TAGLINE}
+            <BrandLogo dark size="sm" />
+            <p className="mt-3 text-[14px] text-white/70">
+              {offerConfig.PRODUCT_TAGLINE}
             </p>
-            <p className="mt-4 text-[13px] text-white/50 max-w-xl leading-relaxed">
+            <p className="mt-3 text-[12px] text-white/45 max-w-xl leading-relaxed">
               {offerConfig.LEGAL_DISCLAIMER}
             </p>
           </div>
           <div>
-            <p className="text-[12px] font-bold uppercase tracking-[0.12em] text-white/45">
+            <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-white/45">
               Links
             </p>
-            <nav className="mt-3 flex flex-col gap-2 text-[15px]">
+            <nav className="mt-3 flex flex-col gap-2 text-[14px]">
               <Link className="text-white/80 hover:text-white" to="/termos">
                 Termos de uso
               </Link>
@@ -43,7 +38,7 @@ export function Footer() {
             </nav>
           </div>
         </div>
-        <div className="mt-8 border-t border-white/10 pt-5 text-[13px] text-white/45 space-y-1">
+        <div className="mt-7 border-t border-white/10 pt-4 text-[12px] text-white/45 space-y-1">
           <p>Produto digital. Nenhum material físico será enviado.</p>
           <p>
             © {offerConfig.COPYRIGHT_YEAR} {offerConfig.BRAND_NAME}. Todos os

@@ -1,5 +1,6 @@
 import { useEffect, useRef, type ImgHTMLAttributes } from 'react'
 import { offerConfig } from '@/config/offerConfig'
+import { BrandLogo } from '@/components/ui/BrandLogo'
 import { Button } from '@/components/ui/Button'
 import { trackEvent } from '@/lib/tracking'
 
@@ -45,21 +46,15 @@ export function Hero({ headline }: HeroProps) {
         }}
       />
 
-      <div className="container-page relative py-8 sm:py-11 md:py-14">
+      <div className="container-page relative py-7 sm:py-11 md:py-14">
         <div className="mx-auto flex w-full max-w-3xl flex-col items-center text-center">
-          <img
-            src={offerConfig.LOGO_HORIZONTAL}
-            alt={offerConfig.PRODUCT_NAME}
-            width={200}
-            height={40}
-            className="h-9 w-auto sm:h-10"
-          />
+          <BrandLogo />
 
-          <p className="mt-4 max-w-full rounded-full border border-orange/20 bg-white px-3 py-1.5 text-[11px] sm:text-[13px] font-bold leading-snug text-orange">
+          <p className="mt-4 max-w-[95%] rounded-full border border-orange/20 bg-white px-3 py-1.5 text-[11px] sm:text-[12px] font-bold leading-snug text-orange">
             {offerConfig.PRODUCT_MECHANISM} · {offerConfig.BNCC_CLAIM}
           </p>
 
-          <h1 className="mt-4 w-full text-[30px] leading-[1.12] sm:text-[42px] md:text-[50px] font-extrabold text-navy text-balance">
+          <h1 className="mt-4 w-full text-[28px] leading-[1.12] sm:text-[42px] md:text-[50px] font-extrabold text-navy text-balance">
             {headline.before}
             {headline.highlight ? (
               <span className="relative inline text-orange">
@@ -83,14 +78,14 @@ export function Hero({ headline }: HeroProps) {
             <Button mode="scroll-to-plans" className="w-full sm:w-auto sm:min-w-[280px]">
               QUERO ESCOLHER MEU ACESSO
             </Button>
-            <p className="mt-2.5 text-[14px] text-muted">
-              A partir de {offerConfig.ENTRY_PRICE} · Pagamento único · Garantia
-              de {offerConfig.GUARANTEE_DAYS} dias
+            <p className="mt-2 text-[12px] leading-snug text-muted">
+              A partir de {offerConfig.ENTRY_PRICE} · Pagamento único · Garantia{' '}
+              {offerConfig.GUARANTEE_DAYS} dias
             </p>
           </div>
         </div>
 
-        <div className="mx-auto mt-7 w-full max-w-4xl sm:mt-9">
+        <div className="mx-auto mt-6 w-full max-w-4xl sm:mt-9">
           <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-[var(--shadow-lift)] sm:rounded-[24px]">
             <img
               src={offerConfig.PRODUCT_IMAGE}

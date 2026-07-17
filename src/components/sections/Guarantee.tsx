@@ -1,9 +1,5 @@
 import { offerConfig } from '@/config/offerConfig'
-import {
-  Section,
-  SectionLead,
-  SectionTitle,
-} from '@/components/ui/Section'
+import { Section } from '@/components/ui/Section'
 import { useInViewTrack } from '@/hooks/useInViewTrack'
 
 export function Guarantee() {
@@ -13,20 +9,21 @@ export function Guarantee() {
     <Section id="garantia" tone="green-soft" compact>
       <div
         ref={ref}
-        className="mx-auto max-w-2xl text-center rounded-[24px] border border-green/20 bg-white/70 p-6 sm:p-8"
+        className="mx-auto flex max-w-xl items-start gap-4 rounded-3xl border border-green/15 bg-white px-5 py-5 sm:px-6 sm:py-6"
       >
-        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-green text-white text-[20px] font-extrabold">
-          {offerConfig.GUARANTEE_DAYS}
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-green text-white text-[14px] font-extrabold">
+          {offerConfig.GUARANTEE_DAYS}d
         </div>
-        <SectionTitle centered className="mt-4">
-          Explore tudo por {offerConfig.GUARANTEE_DAYS} dias
-        </SectionTitle>
-        <SectionLead centered>
-          Acesse o plano escolhido, conheça os materiais e veja como eles se
-          encaixam na sua rotina. Caso perceba que o produto não é para você,
-          solicite o reembolso dentro do prazo de {offerConfig.GUARANTEE_DAYS}{' '}
-          dias, conforme as condições informadas na plataforma.
-        </SectionLead>
+        <div className="min-w-0 text-left">
+          <h2 className="text-[20px] sm:text-[24px] font-extrabold text-navy text-balance">
+            Explore tudo por {offerConfig.GUARANTEE_DAYS} dias
+          </h2>
+          <p className="mt-2 text-[14px] leading-relaxed text-muted">
+            Conheça os materiais no seu ritmo. Se não fizer sentido para você,
+            solicite o reembolso em até {offerConfig.GUARANTEE_DAYS} dias,
+            conforme as condições da plataforma.
+          </p>
+        </div>
       </div>
     </Section>
   )

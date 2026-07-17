@@ -15,44 +15,44 @@ export function Pricing({ onEssentialClick }: PricingProps) {
   const ref = useInViewTrack('PlansViewed')
 
   return (
-    <Section id="planos" tone="cream">
+    <Section id="planos" tone="cream" compact>
       <div ref={ref} className="section-intro">
-        <SectionTitle centered>
-          Escolha o acesso que faz mais sentido para você
-        </SectionTitle>
+        <SectionTitle centered>Escolha seu acesso</SectionTitle>
         <SectionLead centered>
           Essencial pelo menor preço. Premium com o sistema completo.
         </SectionLead>
       </div>
 
-      <div className="mt-8 grid gap-5 lg:grid-cols-2 max-w-5xl mx-auto items-stretch">
-        <article className="flex flex-col rounded-[28px] border border-border bg-white p-6 sm:p-8 shadow-[var(--shadow-soft)]">
-          <p className="inline-flex w-fit rounded-full bg-cool px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-navy">
+      <div className="mt-6 mx-auto grid max-w-xl gap-4 lg:max-w-4xl lg:grid-cols-2 lg:items-stretch">
+        <article className="flex flex-col rounded-3xl border border-border bg-white p-5 sm:p-6 shadow-[var(--shadow-soft)]">
+          <p className="inline-flex w-fit rounded-full bg-cool px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-navy">
             Essencial
           </p>
-          <h3 className="mt-4 text-[24px] font-extrabold text-navy">
+          <h3 className="mt-3 text-[20px] font-extrabold text-navy">
             {offerConfig.PRODUCT_NAME} Essencial
           </h3>
-          <p className="mt-2 text-[15px] text-muted">
+          <p className="mt-1 text-[14px] text-muted">
             As {offerConfig.NUMBER_OF_ACTIVITIES} atividades prontas.
           </p>
 
-          <div className="mt-5">
-            <p className="text-[14px] text-muted">
+          <div className="mt-4">
+            <p className="text-[13px] text-muted">
               De{' '}
               <span className="line-through">
                 {offerConfig.ESSENTIAL_REFERENCE_PRICE}
               </span>
             </p>
-            <p className="text-[52px] font-extrabold leading-none text-navy font-[family-name:var(--font-display)]">
+            <p className="text-[40px] font-extrabold leading-none text-navy font-[family-name:var(--font-display)]">
               {offerConfig.ESSENTIAL_PRICE}
             </p>
-            <p className="mt-2 text-[15px] font-semibold">Pagamento único</p>
+            <p className="mt-1.5 text-[13px] font-semibold text-ink">
+              Pagamento único
+            </p>
           </div>
 
-          <ul className="mt-5 space-y-2 flex-1">
-            {offerConfig.ESSENTIAL_FEATURES.slice(0, 6).map((item) => (
-              <li key={item} className="flex gap-2 text-[14px] text-ink">
+          <ul className="mt-4 space-y-1.5 flex-1">
+            {offerConfig.ESSENTIAL_FEATURES.slice(0, 5).map((item) => (
+              <li key={item} className="flex gap-2 text-[13px] sm:text-[14px] text-ink">
                 <span aria-hidden="true" className="text-green font-bold">
                   ✓
                 </span>
@@ -61,74 +61,59 @@ export function Pricing({ onEssentialClick }: PricingProps) {
             ))}
           </ul>
 
-          <div className="mt-7">
+          <div className="mt-5">
             <Button
               mode="action"
               trackAs="EssentialSelected"
               fullWidth
+              className="!py-3 !text-[15px]"
               onClick={onEssentialClick}
             >
-              QUERO O ESSENCIAL POR {offerConfig.ENTRY_PRICE}
+              QUERO O ESSENCIAL · {offerConfig.ENTRY_PRICE}
             </Button>
           </div>
         </article>
 
-        <article className="relative flex flex-col rounded-[28px] border-[3px] border-orange bg-gradient-to-b from-white to-orange-soft/50 p-6 sm:p-8 shadow-[var(--shadow-lift)]">
-          <p className="absolute -top-3 left-6 inline-flex rounded-full bg-orange px-3.5 py-1.5 text-[12px] font-bold uppercase tracking-wide text-white shadow-[var(--shadow-cta)]">
+        <article className="relative flex flex-col rounded-3xl border-[2.5px] border-orange bg-gradient-to-b from-white to-orange-soft/40 p-5 sm:p-6 shadow-[var(--shadow-lift)]">
+          <p className="absolute -top-2.5 left-1/2 -translate-x-1/2 inline-flex rounded-full bg-orange px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-white shadow-[var(--shadow-cta)]">
             Mais completo
           </p>
 
-          <h3 className="mt-4 text-[24px] font-extrabold text-navy">
+          <h3 className="mt-3 text-[20px] font-extrabold text-navy">
             {offerConfig.PRODUCT_NAME} Premium
           </h3>
-          <p className="mt-2 text-[15px] text-muted">
-            Atividades, avaliações, planos de aula, planejamento e todos os
-            extras.
+          <p className="mt-1 text-[14px] text-muted">
+            Atividades + avaliações, planos e extras.
           </p>
 
-          <div className="mt-5">
-            <p className="text-[14px] text-muted">
+          <div className="mt-4">
+            <p className="text-[13px] text-muted">
               De{' '}
               <span className="line-through">
                 {offerConfig.PREMIUM_REFERENCE_PRICE}
               </span>
             </p>
-            <p className="text-[52px] font-extrabold leading-none text-navy font-[family-name:var(--font-display)]">
+            <p className="text-[40px] font-extrabold leading-none text-navy font-[family-name:var(--font-display)]">
               {offerConfig.PREMIUM_PRICE}
             </p>
-            <p className="mt-3 inline-flex rounded-xl bg-orange px-4 py-2.5 text-[15px] font-extrabold text-white">
-              Por apenas {offerConfig.PREMIUM_VS_ESSENTIAL_DIFF} a mais que o
-              Essencial
+            <p className="mt-2 text-[13px] font-bold text-orange">
+              + {offerConfig.PREMIUM_VS_ESSENTIAL_DIFF} vs Essencial
             </p>
-            <p className="mt-2 text-[15px] font-semibold">Pagamento único</p>
+            <p className="mt-1 text-[13px] font-semibold text-ink">
+              Pagamento único
+            </p>
           </div>
 
-          <ul className="mt-5 space-y-2 flex-1">
-            {offerConfig.PREMIUM_FEATURES.map((item) => (
-              <li key={item} className="flex gap-2 text-[14px] text-ink">
+          <ul className="mt-4 space-y-1.5 flex-1">
+            {offerConfig.PREMIUM_FEATURES.slice(0, 6).map((item) => (
+              <li key={item} className="flex gap-2 text-[13px] sm:text-[14px] text-ink">
                 <span aria-hidden="true" className="text-green font-bold">
                   ✓
                 </span>
                 {item}
               </li>
             ))}
-            {offerConfig.PREMIUM_FUTURE_UPDATES ? (
-              <li className="flex gap-2 text-[14px] text-ink">
-                <span aria-hidden="true" className="text-green font-bold">
-                  ✓
-                </span>
-                Atualizações futuras do acervo Premium
-              </li>
-            ) : null}
-            {offerConfig.PREMIUM_LIFETIME_ACCESS ? (
-              <li className="flex gap-2 text-[14px] text-ink">
-                <span aria-hidden="true" className="text-green font-bold">
-                  ✓
-                </span>
-                Acesso permanente ao conteúdo adquirido
-              </li>
-            ) : null}
-            <li className="flex gap-2 text-[14px] text-ink">
+            <li className="flex gap-2 text-[13px] sm:text-[14px] text-ink">
               <span aria-hidden="true" className="text-green font-bold">
                 ✓
               </span>
@@ -136,30 +121,37 @@ export function Pricing({ onEssentialClick }: PricingProps) {
             </li>
           </ul>
 
-          <div className="mt-7">
-            <Button plan="premium" position="pricing_premium" fullWidth>
-              QUERO O PREMIUM POR {offerConfig.PREMIUM_PRICE}
+          <div className="mt-5 text-center">
+            <Button
+              plan="premium"
+              position="pricing_premium"
+              fullWidth
+              className="!py-3 !text-[15px]"
+            >
+              QUERO O PREMIUM · {offerConfig.PREMIUM_PRICE}
             </Button>
           </div>
         </article>
       </div>
 
-      <div className="mx-auto mt-8 max-w-2xl rounded-[20px] border border-border bg-white p-5 shadow-[var(--shadow-soft)]">
-        <p className="text-[14px] font-bold text-navy mb-3">Comparação rápida</p>
-        <ul className="space-y-2.5">
+      <div className="mx-auto mt-5 max-w-xl rounded-2xl border border-border bg-white p-4 shadow-[var(--shadow-soft)]">
+        <p className="text-[13px] font-bold text-navy mb-2.5 text-center">
+          Comparação rápida
+        </p>
+        <ul className="space-y-2">
           {offerConfig.COMPACT_COMPARISON.map((row) => (
             <li
               key={row.label}
-              className="flex items-center justify-between gap-3 text-[14px] border-b border-border/70 pb-2 last:border-0 last:pb-0"
+              className="flex items-center justify-between gap-2 text-[13px] border-b border-border/60 pb-2 last:border-0 last:pb-0"
             >
               <span className="font-medium text-ink">{row.label}</span>
               <span className="shrink-0 text-[12px] font-semibold text-muted">
-                <span className={row.essential ? 'text-green' : 'text-muted'}>
-                  Ess. {row.essential ? '✓' : '—'}
+                <span className={row.essential ? 'text-green' : 'text-muted/50'}>
+                  E {row.essential ? '✓' : '—'}
                 </span>
-                {' · '}
-                <span className={row.premium ? 'text-green' : 'text-muted'}>
-                  Prem. {row.premium ? '✓' : '—'}
+                <span className="mx-1.5 text-border">|</span>
+                <span className={row.premium ? 'text-green' : 'text-muted/50'}>
+                  P {row.premium ? '✓' : '—'}
                 </span>
               </span>
             </li>

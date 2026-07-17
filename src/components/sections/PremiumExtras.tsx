@@ -6,6 +6,15 @@ import {
 } from '@/components/ui/Section'
 import { useInViewTrack } from '@/hooks/useInViewTrack'
 
+const previewCovers = [
+  { src: '/images/preview-06.webp', label: '100 avaliações' },
+  { src: '/images/preview-03.webp', label: 'Planos de aula' },
+  { src: '/images/preview-02.webp', label: 'Planejamento anual' },
+  { src: '/images/preview-05.webp', label: 'Mapas Premium' },
+  { src: '/images/preview-01.webp', label: 'Linhas do tempo' },
+  { src: '/images/preview-04.webp', label: 'Guia participativo' },
+]
+
 export function PremiumExtras() {
   const ref = useInViewTrack('PremiumBonusesViewed')
 
@@ -13,48 +22,50 @@ export function PremiumExtras() {
     <Section id="premium-extras" tone="navy" compact>
       <div ref={ref}>
         <div className="section-intro">
-          <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.14em] text-orange-light text-center">
+          <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.14em] text-orange-light text-center">
             Exclusivo do Premium
           </p>
-          <SectionTitle centered className="!text-white">
-            Quer também planejar, avaliar e organizar? Leve o sistema completo
+          <SectionTitle centered className="!text-white !text-[24px] sm:!text-[32px]">
+            Quer planejar e avaliar também?
           </SectionTitle>
-          <SectionLead centered className="!text-white/70">
-            Além das atividades: avaliações, planos de aula, planejamento e
-            materiais visuais extras.
+          <SectionLead centered className="!text-white/70 !text-[14px] sm:!text-[16px]">
+            Leve o sistema completo: avaliações, planos, mapas e linha do tempo.
           </SectionLead>
         </div>
 
-        <div className="mt-7 overflow-hidden rounded-[24px] border border-white/10 shadow-[var(--shadow-lift)]">
-          <img
-            src={offerConfig.PREMIUM_IMAGE}
-            alt="Extras Premium do Aula Viva História"
-            width={1400}
-            height={788}
-            loading="lazy"
-            className="aspect-[16/9] w-full object-cover"
-          />
-        </div>
-
-        <div className="mt-5 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
-          {offerConfig.PREMIUM_BONUSES.map((b) => (
+        <div className="mt-6 grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-3">
+          {previewCovers.map((item) => (
             <div
-              key={b.name}
-              className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4"
+              key={item.label}
+              className="overflow-hidden rounded-2xl border border-white/10 bg-white/5"
             >
-              <p className="text-[15px] font-bold text-white">{b.name}</p>
-              <p className="mt-1 text-[13px] text-white/65">{b.description}</p>
+              <div className="aspect-[4/3] overflow-hidden">
+                <img
+                  src={item.src}
+                  alt={item.label}
+                  width={480}
+                  height={360}
+                  loading="lazy"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <p className="px-2.5 py-2 text-center text-[12px] sm:text-[13px] font-semibold text-white/90">
+                {item.label}
+              </p>
             </div>
           ))}
+        </div>
+
+        <div className="mt-4 flex flex-wrap justify-center gap-2">
           {offerConfig.PREMIUM_FUTURE_UPDATES ? (
-            <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
-              <p className="text-[15px] font-bold text-white">
-                Atualizações futuras
-              </p>
-              <p className="mt-1 text-[13px] text-white/65">
-                Do acervo Premium, quando liberadas.
-              </p>
-            </div>
+            <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-[12px] text-white/80">
+              Atualizações futuras do Premium
+            </span>
+          ) : null}
+          {offerConfig.PREMIUM_LIFETIME_ACCESS ? (
+            <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-[12px] text-white/80">
+              Acesso permanente ao conteúdo
+            </span>
           ) : null}
         </div>
       </div>
