@@ -18,11 +18,11 @@ export const offerConfig = {
 
   ESSENTIAL_PLAN_NAME: 'Essencial',
   ESSENTIAL_PRICE: 'R$ 10,00',
-  ESSENTIAL_CHECKOUT_URL: '',
+  ESSENTIAL_CHECKOUT_URL: 'https://pay.cakto.com.br/3choscs_965728',
 
   PREMIUM_PLAN_NAME: 'Premium',
   PREMIUM_PRICE: 'R$ 22,90',
-  PREMIUM_CHECKOUT_URL: '',
+  PREMIUM_CHECKOUT_URL: 'https://pay.cakto.com.br/rq2ivin',
 
   PRICE_DIFFERENCE: 'R$ 12,90',
   ENTRY_PRICE: 'R$ 10',
