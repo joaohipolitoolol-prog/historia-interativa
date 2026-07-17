@@ -42,9 +42,9 @@ export const offerConfig = {
 
   WHATSAPP_NUMBER: '447402867442',
   WHATSAPP_MESSAGE:
-    'Oi, comprei o Aula Viva História e preciso de ajuda com meu acesso.',
+    'Oi! Acabei de comprar o Aula Viva História e quero receber as orientações de acesso.',
   WHATSAPP_URL:
-    'https://wa.me/447402867442?text=Oi%2C%20comprei%20o%20Aula%20Viva%20Hist%C3%B3ria%20e%20preciso%20de%20ajuda%20com%20meu%20acesso.',
+    'https://wa.me/447402867442?text=Oi%21%20Acabei%20de%20comprar%20o%20Aula%20Viva%20Hist%C3%B3ria%20e%20quero%20receber%20as%20orienta%C3%A7%C3%B5es%20de%20acesso.',
 
   META_PIXEL_ID: '1533521078177669',
   GA_MEASUREMENT_ID: '',

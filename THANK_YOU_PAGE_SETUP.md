@@ -1,30 +1,11 @@
-# Página de obrigado — configuração
+# Página de obrigado
 
-## Rotas
+URL única para os dois planos:
 
-| Plano | URL relativa | URL absoluta (produção) |
-|-------|--------------|-------------------------|
-| Essencial | `/obrigado?plan=essential` | `https://historia-ashy-gamma.vercel.app/obrigado?plan=essential` |
-| Premium | `/obrigado?plan=premium` | `https://historia-ashy-gamma.vercel.app/obrigado?plan=premium` |
-| Genérico | `/obrigado` | `https://historia-ashy-gamma.vercel.app/obrigado` |
+`https://historia-ashy-gamma.vercel.app/obrigado`
 
-## No checkout externo
+No Cakto, redirecione Essencial e Premium para a mesma URL.
 
-Configure o redirecionamento pós-pagamento:
-
-1. Essencial → URL com `plan=essential`
-2. Premium → URL com `plan=premium`
-
-O parâmetro `plan` **apenas personaliza a interface**. Não valida pagamento.
-
-## WhatsApp
-
-Número: `447402867442`
+A página é só confirmação + botão de WhatsApp (acesso ainda é avisado por lá).
 
 Mensagem padrão em `offerConfig.WHATSAPP_MESSAGE`.
-
-Função: `buildWhatsAppUrl()` em `src/lib/checkout.ts`.
-
-## SEO
-
-A página injeta `noindex,nofollow` e não deve rankear no Google.
