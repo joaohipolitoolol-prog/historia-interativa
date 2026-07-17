@@ -99,7 +99,7 @@ export const offerConfig = {
   OFFER_VARIANT: 'two_plans' as OfferVariant,
   FORCE_HEADLINE_VARIANT: null as HeadlineVariant | null,
 
-  OFFER_BAR_TEXT: 'OFERTA DE LANÇAMENTO • 500+ ATIVIDADES A PARTIR DE R$ 10',
+  OFFER_BAR_TEXT: '500+ ATIVIDADES A PARTIR DE R$ 10',
 
   HEADLINE_VARIANTS: {
     A: {

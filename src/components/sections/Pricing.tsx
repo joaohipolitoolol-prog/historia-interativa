@@ -81,7 +81,7 @@ export function Pricing() {
             <p className="text-[40px] font-extrabold leading-none text-navy font-[family-name:var(--font-display)]">
               {offerConfig.PREMIUM_PRICE}
             </p>
-            <p className="mt-2 inline-flex rounded-full bg-orange px-3 py-1.5 text-[14px] font-extrabold text-white">
+            <p className="mt-2 inline-flex rounded-full bg-orange px-3.5 py-2 text-[15px] sm:text-[16px] font-extrabold text-white">
               Apenas {offerConfig.PRICE_DIFFERENCE} a mais que o Essencial
             </p>
             <p className="mt-1.5 text-[15px] font-semibold">Pagamento único</p>
